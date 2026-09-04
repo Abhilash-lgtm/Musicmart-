@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FaSave, FaArrowLeft, FaPlus, FaTrash } from 'react-icons/fa';
-import productService from '../services/productService';
-import Input from './Input';
-import Button from './Button';
+import productService from '../../services/productService';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
 
-export const EditProduct = () => {
-  const { id } = useParams();
+export const AddProduct = () => {
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(true);
-  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
@@ -19,43 +16,16 @@ export const EditProduct = () => {
     category: 'guitars',
     price: '',
     originalPrice: '',
-    stock: '',
+    stock: '15',
     image: '',
     description: '',
   });
 
-  const [specList, setSpecList] = useState([]);
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const p = await productService.getProductById(id);
-        setFormData({
-          title: p.title || '',
-          brand: p.brand || '',
-          category: p.category || 'guitars',
-          price: String(p.price || ''),
-          originalPrice: p.originalPrice ? String(p.originalPrice) : '',
-          stock: String(p.stock || ''),
-          image: p.image || '',
-          description: p.description || '',
-        });
-
-        if (p.specs) {
-          const specsArray = Object.entries(p.specs).map(([key, value]) => ({
-            key,
-            value,
-          }));
-          setSpecList(specsArray);
-        }
-      } catch (err) {
-        setError('Failed to fetch instrument details for editing');
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProduct();
-  }, [id]);
+  const [specList, setSpecList] = useState([
+    { key: 'Finish', value: 'Gloss Nitrocellulose' },
+    { key: 'Body Material', value: 'Selected Alder' },
+    { key: 'Electronics', value: 'Custom Shop Pickups' },
+  ]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -78,7 +48,7 @@ export const EditProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setSaving(true);
+    setLoading(true);
 
     try {
       const specsMap = {};
@@ -93,73 +63,49 @@ export const EditProduct = () => {
         price: parseFloat(formData.price),
         originalPrice: formData.originalPrice ? parseFloat(formData.originalPrice) : null,
         stock: parseInt(formData.stock, 10),
+        rating: 5.0,
+        reviewsCount: 0,
         specs: specsMap,
+        images: [formData.image],
       };
 
-      await productService.updateProduct(id, payload);
+      await productService.createProduct(payload);
       navigate('/admin/products');
     } catch (err) {
-      setError(err.message || 'Failed to update instrument');
+      setError(err.message || 'Failed to create instrument');
     } finally {
-      setSaving(false);
+      setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <div className="loading-spinner-container">
-        <div className="spinner" />
-        <p>Loading instrument editor...</p>
-      </div>
-    );
-  }
-
   return (
-    <div style={{ maxWidth: '800px' }}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <button
-          onClick={() => navigate('/admin/products')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            color: 'var(--text-muted)',
-            fontSize: '0.9rem',
-            fontWeight: 600,
-          }}
-        >
+    <div className="admin-form-container">
+      <div className="detail-back-wrap">
+        <button onClick={() => navigate('/admin/products')} className="back-btn">
           <FaArrowLeft size={14} /> Back to Products
         </button>
       </div>
 
-      <div className="glass-panel" style={{ padding: '2rem' }}>
-        <h1 style={{ fontSize: '1.75rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-main)' }}>
-          Edit Instrument: {formData.title}
+      <div className="glass-panel admin-form-panel">
+        <h1 className="admin-form-title">
+          Add New Instrument
         </h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '2rem' }}>
-          Modify pricing, stock availability, category tags, and specs.
+        <p className="admin-form-desc">
+          Create a new catalog item with brand, pricing, media, and technical specs.
         </p>
 
         {error && (
-          <div
-            style={{
-              padding: '0.75rem 1rem',
-              borderRadius: 'var(--radius-md)',
-              background: 'rgba(239, 68, 68, 0.1)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
-              color: '#dc2626',
-              marginBottom: '1.5rem',
-            }}
-          >
+          <div className="auth-error-alert">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1.25rem' }}>
+          <div className="form-grid-2fr-1fr">
             <Input
               label="Instrument Title"
               name="title"
+              placeholder="e.g. Fender Custom Stratocaster '62"
               value={formData.title}
               onChange={handleChange}
               required
@@ -167,13 +113,14 @@ export const EditProduct = () => {
             <Input
               label="Brand / Manufacturer"
               name="brand"
+              placeholder="e.g. Fender, Yamaha, Roland"
               value={formData.brand}
               onChange={handleChange}
               required
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.25rem' }}>
+          <div className="form-grid-3col">
             <div className="form-group">
               <label className="form-label">Category</label>
               <select
@@ -195,6 +142,7 @@ export const EditProduct = () => {
               type="number"
               step="0.01"
               name="price"
+              placeholder="1299.99"
               value={formData.price}
               onChange={handleChange}
               required
@@ -204,6 +152,7 @@ export const EditProduct = () => {
               label="Stock Units"
               type="number"
               name="stock"
+              placeholder="15"
               value={formData.stock}
               onChange={handleChange}
               required
@@ -214,6 +163,7 @@ export const EditProduct = () => {
             label="Product Image URL"
             type="url"
             name="image"
+            placeholder="https://images.unsplash.com/..."
             value={formData.image}
             onChange={handleChange}
             required
@@ -224,15 +174,16 @@ export const EditProduct = () => {
             name="description"
             as="textarea"
             rows={4}
+            placeholder="Provide musician-focused features, tone characteristics, and inclusions..."
             value={formData.description}
             onChange={handleChange}
             required
           />
 
           {/* Dynamic Technical Specifications */}
-          <div style={{ marginTop: '2rem', borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-              <h3 style={{ fontSize: '1.1rem', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>
+          <div className="specs-manager-wrap">
+            <div className="specs-manager-header">
+              <h3 className="specs-manager-title">
                 Technical Specifications
               </h3>
               <Button type="button" variant="outline" size="sm" icon={FaPlus} onClick={handleAddSpec}>
@@ -240,29 +191,27 @@ export const EditProduct = () => {
               </Button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
+            <div className="specs-manager-list">
               {specList.map((spec, idx) => (
-                <div key={idx} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <div key={idx} className="spec-input-row">
                   <input
                     type="text"
                     placeholder="Spec Name (e.g. Fretboard)"
                     value={spec.key}
                     onChange={(e) => handleSpecChange(idx, 'key', e.target.value)}
-                    className="form-input"
-                    style={{ flex: 1 }}
+                    className="form-input spec-key-input"
                   />
                   <input
                     type="text"
                     placeholder="Spec Value (e.g. Indian Rosewood)"
                     value={spec.value}
                     onChange={(e) => handleSpecChange(idx, 'value', e.target.value)}
-                    className="form-input"
-                    style={{ flex: 1.5 }}
+                    className="form-input spec-val-input"
                   />
                   <button
                     type="button"
                     onClick={() => handleRemoveSpec(idx)}
-                    style={{ color: '#ef4444', padding: '0.5rem' }}
+                    className="spec-remove-btn"
                   >
                     <FaTrash size={14} />
                   </button>
@@ -271,7 +220,7 @@ export const EditProduct = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
+          <div className="admin-form-actions">
             <Button
               type="button"
               variant="secondary"
@@ -284,10 +233,10 @@ export const EditProduct = () => {
               type="submit"
               variant="primary"
               size="md"
-              isLoading={saving}
+              isLoading={loading}
               icon={FaSave}
             >
-              Update Changes
+              Save Instrument to Catalog
             </Button>
           </div>
         </form>
@@ -296,4 +245,4 @@ export const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default AddProduct;

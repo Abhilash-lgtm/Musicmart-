@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaTrash, FaShoppingCart, FaArrowRight, FaStar } from 'react-icons/fa';
-import { WishlistContext } from '../context/WishlistContext';
-import { CartContext } from '../context/CartContext';
-import Button from './Button';
+import { WishlistContext } from '../../context/WishlistContext';
+import { CartContext } from '../../context/CartContext';
+import Button from '../../components/ui/Button';
 
 export const Wishlist = () => {
   const navigate = useNavigate();
@@ -20,10 +20,10 @@ export const Wishlist = () => {
       <div className="container">
         <div className="empty-wishlist-view animate-fade-in">
           <div className="empty-icon">💜</div>
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--text-main)' }}>
+          <h2 className="empty-wishlist-title">
             Your Wishlist is Empty
           </h2>
-          <p style={{ color: 'var(--text-muted)', maxWidth: '400px', margin: '0 auto 1.5rem' }}>
+          <p className="empty-wishlist-desc">
             Save your favorite guitars, keyboards, and gear to keep an eye on stock and promotions.
           </p>
           <Link to="/category/all">
@@ -37,13 +37,13 @@ export const Wishlist = () => {
   }
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+    <div className="container wishlist-container">
+      <div className="wishlist-header">
         <div>
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--text-main)' }}>
+          <h1 className="wishlist-title">
             Saved <span className="text-gradient">Wishlist</span> ({wishlistItems.length})
           </h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+          <p className="wishlist-subtitle">
             Items you have bookmarked for future performances and studio sessions.
           </p>
         </div>
@@ -56,9 +56,8 @@ export const Wishlist = () => {
         {wishlistItems.map((product) => (
           <div
             key={product.id}
-            className="product-card animate-fade-in"
+            className="product-card animate-fade-in product-card-clickable"
             onClick={() => navigate(`/product/${product.id}`)}
-            style={{ cursor: 'pointer' }}
           >
             <div className="product-card-image-wrap">
               <img
@@ -88,8 +87,8 @@ export const Wishlist = () => {
                 {product.title}
               </h4>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', color: '#f59e0b', gap: '0.2rem', fontSize: '0.85rem', fontWeight: 800 }}>
+              <div className="product-card-rating">
+                <div className="product-card-star">
                   <FaStar size={14} /> {product.rating || 5.0}
                 </div>
               </div>

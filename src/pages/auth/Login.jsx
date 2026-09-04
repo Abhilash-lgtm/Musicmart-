@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaMusic, FaLock, FaEnvelope, FaArrowRight, FaShieldAlt, FaUserCheck } from 'react-icons/fa';
-import { AuthContext } from '../context/AuthContext';
-import Input from './Input';
-import Button from './Button';
+import { AuthContext } from '../../context/AuthContext';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ export const Login = () => {
         navigate('/admin');
       } else {
         await login('alex@example.com', 'password123');
-        navigate('/');
+        navigate(redirectPath);
       }
     } catch (err) {
       setError(err.message || 'Demo login failed.');
@@ -54,49 +54,32 @@ export const Login = () => {
   };
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem 1.5rem',
-        background: 'radial-gradient(circle at top, rgba(225, 29, 72, 0.08) 0%, var(--bg-primary) 70%)',
-      }}
-    >
-      <div
-        className="glass-panel animate-fade-in"
-        style={{
-          width: '100%',
-          maxWidth: '460px',
-          padding: '2.5rem',
-          boxShadow: 'var(--shadow-lg)',
-        }}
-      >
+    <div className="auth-page-wrapper auth-page-login">
+      <div className="glass-panel animate-fade-in auth-card">
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
+        <div className="auth-header">
+          <Link to="/" className="auth-brand-link">
             <div className="brand-icon-wrapper">
               <FaMusic size={20} />
             </div>
-            <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)' }}>
-              Music<span style={{ color: 'var(--accent-pink)' }}>Mart</span>
+            <span className="auth-brand-text">
+              Music<span className="brand-pink">Mart</span>
             </span>
           </Link>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.4rem', color: 'var(--text-main)' }}>
+          <h2 className="auth-title">
             Welcome Back
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+          <p className="auth-subtitle">
             Log in to manage your orders, wishlist, and instruments.
           </p>
         </div>
 
         {/* Demo Fast Login Buttons */}
-        <div style={{ marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-          <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-dim)', textAlign: 'center', textTransform: 'uppercase' }}>
+        <div className="auth-demo-box">
+          <div className="auth-demo-label">
             Quick Demo 1-Click Login
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+          <div className="auth-demo-grid">
             <Button
               variant="outline"
               size="sm"
@@ -118,24 +101,14 @@ export const Login = () => {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', margin: '1.5rem 0' }}>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border-color)' }} />
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>OR WITH EMAIL</span>
-          <div style={{ flex: 1, height: '1px', background: 'var(--border-color)' }} />
+        <div className="auth-divider-row">
+          <div className="auth-divider-line" />
+          <span className="auth-divider-text">OR WITH EMAIL</span>
+          <div className="auth-divider-line" />
         </div>
 
         {error && (
-          <div
-            style={{
-              padding: '0.75rem 1rem',
-              borderRadius: 'var(--radius-md)',
-              background: 'rgba(239, 68, 68, 0.1)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
-              color: '#dc2626',
-              fontSize: '0.85rem',
-              marginBottom: '1.25rem',
-            }}
-          >
+          <div className="auth-error-alert">
             {error}
           </div>
         )}
@@ -163,11 +136,8 @@ export const Login = () => {
             required
           />
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1.5rem' }}>
-            <Link
-              to="/forgot-password"
-              style={{ fontSize: '0.825rem', color: 'var(--accent-pink)', fontWeight: 600 }}
-            >
+          <div className="auth-forgot-row">
+            <Link to="/forgot-password" className="auth-forgot-link">
               Forgot password?
             </Link>
           </div>
@@ -177,16 +147,16 @@ export const Login = () => {
             variant="primary"
             size="lg"
             isLoading={loading}
-            style={{ width: '100%' }}
+            className="auth-submit-btn"
             icon={FaArrowRight}
           >
             Sign In
           </Button>
         </form>
 
-        <div style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+        <div className="auth-footer-text">
           Don't have an account?{' '}
-          <Link to="/register" style={{ color: 'var(--accent-pink)', fontWeight: 700 }}>
+          <Link to="/register" className="auth-switch-link">
             Create one here
           </Link>
         </div>

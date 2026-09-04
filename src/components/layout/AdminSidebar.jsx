@@ -10,7 +10,7 @@ import {
   FaSignOutAlt,
   FaMusic,
 } from 'react-icons/fa';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 export const AdminSidebar = () => {
   const { user, logout } = useContext(AuthContext);

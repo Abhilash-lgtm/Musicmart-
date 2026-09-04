@@ -8,12 +8,13 @@ import {
   FaUser,
   FaSignOutAlt,
   FaTachometerAlt,
+  FaSignInAlt,
 } from 'react-icons/fa';
-import { AuthContext } from '../context/AuthContext';
-import { CartContext } from '../context/CartContext';
-import { WishlistContext } from '../context/WishlistContext';
-import Dropdown, { DropdownItem } from './Dropdown';
-import Button from './Button';
+import { AuthContext } from '../../context/AuthContext';
+import { CartContext } from '../../context/CartContext';
+import { WishlistContext } from '../../context/WishlistContext';
+import Dropdown, { DropdownItem } from '../ui/Dropdown';
+import Button from '../ui/Button';
 
 export const Navbar = () => {
   const navigate = useNavigate();
@@ -79,6 +80,12 @@ export const Navbar = () => {
             >
               Track Order
             </Link>
+            <Link
+              to="/profile"
+              className={`nav-link ${location.pathname === '/profile' ? 'active' : ''}`}
+            >
+              Profile
+            </Link>
           </nav>
 
           {/* Action Icons */}
@@ -95,26 +102,37 @@ export const Navbar = () => {
               {cartCount > 0 && <span className="nav-counter">{cartCount}</span>}
             </Link>
 
-            {/* Profile Dropdown / Sign in */}
+            {/* Profile Button */}
+            <Button
+              variant={location.pathname === '/profile' ? 'primary' : 'outline'}
+              size="sm"
+              icon={FaUser}
+              onClick={() => navigate('/profile')}
+              title="My Profile"
+            >
+              Profile
+            </Button>
+
+            {/* Profile Dropdown / Login */}
             {isAuthenticated ? (
               <Dropdown
                 align="right"
                 trigger={
-                  <div className="nav-user-chip">
+                  <div className="navbar-chip">
                     <img
                       src={user?.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80'}
                       alt={user?.name}
-                      className="nav-user-avatar"
+                      className="navbar-avatar"
                     />
-                    <span className="nav-user-name">
+                    <span className="navbar-user-name">
                       {user?.name?.split(' ')[0]}
                     </span>
                   </div>
                 }
               >
-                <div className="nav-user-info">
-                  <div className="nav-user-fullname">{user?.name}</div>
-                  <div className="nav-user-email">{user?.email}</div>
+                <div className="navbar-profile-info">
+                  <div className="navbar-user-name">{user?.name}</div>
+                  <div className="navbar-user-email">{user?.email}</div>
                 </div>
 
                 {isAdmin && (
@@ -145,16 +163,17 @@ export const Navbar = () => {
                 </DropdownItem>
               </Dropdown>
             ) : (
-              <div className="nav-auth-buttons">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => navigate('/login')}
-                >
-                  Sign In
-                </Button>
+              <div className="navbar-auth-row">
                 <Button
                   variant="primary"
+                  size="sm"
+                  icon={FaSignInAlt}
+                  onClick={() => navigate('/login')}
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="outline"
                   size="sm"
                   onClick={() => navigate('/register')}
                 >

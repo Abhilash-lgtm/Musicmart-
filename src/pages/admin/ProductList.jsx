@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaPlus, FaEdit, FaTrash, FaEye } from 'react-icons/fa';
-import productService from '../services/productService';
-import Button from './Button';
-import StatusBadge from './StatusBadge';
-import Modal from './Modal';
+import productService from '../../services/productService';
+import Button from '../../components/ui/Button';
+import StatusBadge from '../../components/common/StatusBadge';
+import Modal from '../../components/ui/Modal';
 
 export const ProductList = () => {
   const navigate = useNavigate();
@@ -52,10 +52,10 @@ export const ProductList = () => {
 
   return (
     <div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', flexWrap: 'wrap', gap: '1rem' }}>
+      <div className="admin-page-header">
         <div>
-          <h1 style={{ fontSize: '1.85rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>Inventory Catalog</h1>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0 }}>
+          <h1 className="admin-page-title">Inventory Catalog</h1>
+          <p className="admin-page-desc">
             Manage instruments, stock quantities, pricing, and technical specifications.
           </p>
         </div>
@@ -69,34 +69,22 @@ export const ProductList = () => {
       </div>
 
       {/* Filters Bar */}
-      <div
-        className="glass-panel"
-        style={{
-          padding: '1rem 1.25rem',
-          marginBottom: '1.5rem',
-          display: 'flex',
-          gap: '1rem',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <div style={{ position: 'relative', flex: 1, minWidth: '220px' }}>
-          <FaSearch size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} />
+      <div className="glass-panel admin-filter-bar">
+        <div className="admin-search-wrap">
+          <FaSearch size={16} className="admin-search-icon" />
           <input
             type="text"
             placeholder="Search catalog by title, brand, or SKU..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="form-input"
-            style={{ paddingLeft: '2.5rem' }}
+            className="form-input admin-search-input"
           />
         </div>
 
         <select
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
-          className="form-select"
-          style={{ width: 'auto' }}
+          className="form-select select-auto-width"
         >
           <option value="all">All Categories</option>
           <option value="guitars">Guitars & Basses</option>
@@ -117,20 +105,20 @@ export const ProductList = () => {
               <th>Price</th>
               <th>Stock Status</th>
               <th>Rating</th>
-              <th style={{ textAlign: 'right' }}>Actions</th>
+              <th className="text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan="6" style={{ textAlign: 'center', padding: '3rem' }}>
-                  <div className="spinner" style={{ margin: '0 auto 1rem' }} />
+                <td colSpan="6" className="table-empty-cell">
+                  <div className="spinner spinner-center" />
                   Loading inventory...
                 </td>
               </tr>
             ) : products.length === 0 ? (
               <tr>
-                <td colSpan="6" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
+                <td colSpan="6" className="table-empty-cell">
                   No instruments found matching your search.
                 </td>
               </tr>
@@ -138,30 +126,30 @@ export const ProductList = () => {
               products.map((p) => (
                 <tr key={p.id}>
                   <td>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div className="table-product-cell">
                       <img
                         src={p.image}
                         alt={p.title}
-                        style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', objectFit: 'cover' }}
+                        className="table-product-thumb"
                       />
                       <div>
-                        <div style={{ fontWeight: 800, fontSize: '0.95rem', color: 'var(--text-main)' }}>{p.title}</div>
-                        <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', fontWeight: 700 }}>
+                        <div className="table-product-title">{p.title}</div>
+                        <div className="table-product-brand">
                           {p.brand}
                         </div>
                       </div>
                     </div>
                   </td>
                   <td>
-                    <span style={{ textTransform: 'capitalize', color: 'var(--text-muted)' }}>{p.category}</span>
+                    <span className="table-category-tag">{p.category}</span>
                   </td>
-                  <td style={{ fontWeight: 800 }}>${p.price?.toFixed(2)}</td>
+                  <td className="table-price-val">${p.price?.toFixed(2)}</td>
                   <td>
                     <StatusBadge status={p.stock} type="stock" />
                   </td>
                   <td>⭐ {p.rating}</td>
-                  <td style={{ textAlign: 'right' }}>
-                    <div style={{ display: 'inline-flex', gap: '0.4rem' }}>
+                  <td className="text-right">
+                    <div className="table-actions-group">
                       <Button
                         variant="outline"
                         size="sm"
@@ -214,9 +202,9 @@ export const ProductList = () => {
           </>
         }
       >
-        <p style={{ color: 'var(--text-muted)', margin: 0 }}>
+        <p className="modal-delete-desc">
           Are you sure you want to permanently delete{' '}
-          <strong style={{ color: 'var(--text-main)' }}>"{deleteTarget?.title}"</strong>? This will remove the instrument from the storefront and customer searches.
+          <strong className="modal-delete-target">"{deleteTarget?.title}"</strong>? This will remove the instrument from the storefront and customer searches.
         </p>
       </Modal>
     </div>

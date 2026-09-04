@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaSave, FaArrowLeft, FaTruck, FaBox, FaCheckCircle } from 'react-icons/fa';
-import adminService from '../services/adminService';
-import StatusBadge from './StatusBadge';
-import Input from './Input';
-import Button from './Button';
+import adminService from '../../services/adminService';
+import StatusBadge from '../../components/common/StatusBadge';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
 
 export const OrderStatusUpdate = () => {
   const { id } = useParams();
@@ -70,30 +70,20 @@ export const OrderStatusUpdate = () => {
   }
 
   return (
-    <div style={{ maxWidth: '800px' }}>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <button
-          onClick={() => navigate('/admin/orders')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            color: 'var(--text-muted)',
-            fontSize: '0.9rem',
-            fontWeight: 600,
-          }}
-        >
+    <div className="admin-form-container">
+      <div className="detail-back-wrap">
+        <button onClick={() => navigate('/admin/orders')} className="back-btn">
           <FaArrowLeft size={14} /> Back to Orders
         </button>
       </div>
 
-      <div className="glass-panel" style={{ padding: '2rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+      <div className="glass-panel admin-form-panel">
+        <div className="admin-page-header">
           <div>
-            <h1 style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--text-main)', margin: 0 }}>
+            <h1 className="admin-page-title">
               Order Fulfillment #{order.id}
             </h1>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0 }}>
+            <p className="admin-page-desc">
               Placed by {order.customerName} ({order.customerEmail}) on {new Date(order.createdAt).toLocaleDateString()}
             </p>
           </div>
@@ -101,26 +91,13 @@ export const OrderStatusUpdate = () => {
         </div>
 
         {success && (
-          <div
-            style={{
-              padding: '0.75rem 1rem',
-              borderRadius: 'var(--radius-md)',
-              background: 'rgba(5, 150, 105, 0.1)',
-              border: '1px solid rgba(5, 150, 105, 0.25)',
-              color: 'var(--accent-emerald)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              marginBottom: '1.5rem',
-              fontWeight: 600,
-            }}
-          >
+          <div className="settings-success-alert">
             <FaCheckCircle size={16} /> Order stage & tracking code successfully updated!
           </div>
         )}
 
-        <form onSubmit={handleUpdate} style={{ marginBottom: '2.5rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.25rem', marginBottom: '1.5rem' }}>
+        <form onSubmit={handleUpdate} className="status-update-form">
+          <div className="form-grid-3col">
             <div className="form-group">
               <label className="form-label">Fulfillment Status</label>
               <select
@@ -158,46 +135,35 @@ export const OrderStatusUpdate = () => {
         </form>
 
         {/* Order Items Manifest */}
-        <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1.5rem' }}>
-          <h3 style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-main)' }}>
-            <FaBox size={16} style={{ color: 'var(--accent-pink)' }} /> Order Package Manifest
+        <div className="manifest-section">
+          <h3 className="manifest-title">
+            <FaBox size={16} className="icon-pink" /> Order Package Manifest
           </h3>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+          <div className="manifest-items-list">
             {order.items?.map((item, idx) => (
-              <div
-                key={idx}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '0.75rem',
-                  borderRadius: 'var(--radius-sm)',
-                  background: '#f8fafc',
-                  border: '1px solid var(--border-color)',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div key={idx} className="manifest-item-box">
+                <div className="manifest-item-left">
                   <img
                     src={item.image}
                     alt={item.title}
-                    style={{ width: '40px', height: '40px', borderRadius: '4px', objectFit: 'cover' }}
+                    className="manifest-item-thumb"
                   />
                   <div>
-                    <div style={{ fontWeight: 700, fontSize: '0.9rem', color: 'var(--text-main)' }}>{item.title}</div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                    <div className="manifest-item-name">{item.title}</div>
+                    <div className="manifest-item-qty-text">
                       Quantity: {item.quantity}
                     </div>
                   </div>
                 </div>
-                <div style={{ fontWeight: 800, color: 'var(--text-main)' }}>
+                <div className="manifest-item-price-val">
                   ${(item.price * item.quantity).toFixed(2)}
                 </div>
               </div>
             ))}
           </div>
 
-          <div style={{ marginTop: '1.5rem', textAlign: 'right', fontSize: '1.1rem', fontWeight: 900 }}>
+          <div className="manifest-total-summary">
             Total Invoiced: <span className="text-gradient">${order.total?.toFixed(2)}</span>
           </div>
         </div>

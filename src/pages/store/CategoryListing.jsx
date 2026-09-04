@@ -9,10 +9,10 @@ import {
   FaCheck,
   FaUndo,
 } from 'react-icons/fa';
-import productService from '../services/productService';
-import { CartContext } from '../context/CartContext';
-import { WishlistContext } from '../context/WishlistContext';
-import Button from './Button';
+import productService from '../../services/productService';
+import { CartContext } from '../../context/CartContext';
+import { WishlistContext } from '../../context/WishlistContext';
+import Button from '../../components/ui/Button';
 
 export const CategoryListing = () => {
   const { id: categoryParam } = useParams();
@@ -93,13 +93,13 @@ export const CategoryListing = () => {
   };
 
   return (
-    <div className="container" style={{ padding: '2.5rem 1.5rem' }}>
+    <div className="container category-page-container">
       {/* Category Pills Header */}
-      <div style={{ marginBottom: '2.5rem' }}>
-        <h1 style={{ fontSize: '2.2rem', fontWeight: 900, marginBottom: '1rem', color: 'var(--text-main)' }}>
+      <div className="category-header-wrap">
+        <h1 className="category-main-title">
           Music Store <span className="text-gradient">Catalog</span>
         </h1>
-        <div style={{ display: 'flex', gap: '0.65rem', overflowX: 'auto', paddingBottom: '0.5rem' }}>
+        <div className="category-pills-row">
           <button
             type="button"
             className={`category-pill ${activeCategory === 'all' ? 'active' : ''}`}
@@ -121,29 +121,17 @@ export const CategoryListing = () => {
       </div>
 
       {/* Filter and Control Bar */}
-      <div
-        className="glass-panel"
-        style={{
-          padding: '1.25rem 1.5rem',
-          marginBottom: '2.5rem',
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1.5rem',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
+      <div className="glass-panel category-control-bar">
         {/* Search */}
-        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', gap: '0.5rem', flex: '1 1 300px' }}>
-          <div style={{ position: 'relative', width: '100%' }}>
-            <FaSearch size={16} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)' }} />
+        <form onSubmit={handleSearchSubmit} className="category-search-form">
+          <div className="category-search-box">
+            <FaSearch size={16} className="category-search-icon" />
             <input
               type="text"
               placeholder="Search by title, brand, or model..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="form-input"
-              style={{ paddingLeft: '2.6rem' }}
+              className="form-input category-search-input"
             />
           </div>
           <Button type="submit" variant="secondary" size="md">
@@ -152,28 +140,27 @@ export const CategoryListing = () => {
         </form>
 
         {/* Sort & Price Range */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Max Price:</span>
+        <div className="category-filters-wrap">
+          <div className="price-slider-group">
+            <span className="price-slider-label">Max Price:</span>
             <input
               type="range"
-              min="200"
+              min="100"
               max="5000"
-              step="100"
+              step="50"
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
-              style={{ accentColor: 'var(--accent-pink)', cursor: 'pointer' }}
+              className="price-slider-input"
             />
-            <span style={{ fontSize: '0.85rem', fontWeight: 800 }}>${maxPrice}</span>
+            <span className="price-slider-value">${maxPrice}</span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <FaSlidersH size={14} style={{ color: 'var(--text-dim)' }} />
+          <div className="sort-select-group">
+            <FaSlidersH size={14} className="sort-icon" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
-              className="form-select"
-              style={{ padding: '0.45rem 1rem', width: 'auto', fontSize: '0.85rem' }}
+              className="form-select sort-select"
             >
               <option value="featured">Featured First</option>
               <option value="price-low">Price: Low to High</option>
@@ -191,9 +178,9 @@ export const CategoryListing = () => {
       </div>
 
       {/* Results Count */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-        <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-          Showing <span style={{ color: 'var(--text-main)', fontWeight: 800 }}>{products.length}</span> instruments
+      <div className="results-count-bar">
+        <p className="results-count-text">
+          Showing <span className="results-count-number">{products.length}</span> instruments
         </p>
       </div>
 
@@ -206,8 +193,8 @@ export const CategoryListing = () => {
       ) : products.length === 0 ? (
         <div className="no-instruments-found">
           <div className="empty-icon">🎸</div>
-          <h3 style={{ fontWeight: 800 }}>No Instruments Found</h3>
-          <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem' }}>
+          <h3 className="empty-title">No Instruments Found</h3>
+          <p className="empty-desc">
             We couldn't find any instruments matching your active search and filter criteria.
           </p>
           <button type="button" className="btn-reset-filters" onClick={resetFilters}>
@@ -223,9 +210,8 @@ export const CategoryListing = () => {
             return (
               <div
                 key={product.id}
-                className="product-card"
+                className="product-card product-card-clickable"
                 onClick={() => navigate(`/product/${product.id}`)}
-                style={{ cursor: 'pointer' }}
               >
                 <div className="product-card-image-wrap">
                   <img
@@ -255,11 +241,11 @@ export const CategoryListing = () => {
                     {product.title}
                   </h4>
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', color: '#f59e0b', gap: '0.25rem', fontSize: '0.85rem', fontWeight: 800 }}>
+                  <div className="product-card-rating">
+                    <div className="product-card-star">
                       <FaStar size={14} /> {product.rating}
                     </div>
-                    <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+                    <span className="product-card-reviews">
                       ({product.reviewsCount} reviews)
                     </span>
                   </div>

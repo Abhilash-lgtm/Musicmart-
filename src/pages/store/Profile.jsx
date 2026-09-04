@@ -10,11 +10,11 @@ import {
   FaSignOutAlt,
   FaCheckCircle,
 } from 'react-icons/fa';
-import { AuthContext } from '../context/AuthContext';
-import orderService from '../services/orderService';
-import Input from './Input';
-import Button from './Button';
-import StatusBadge from './StatusBadge';
+import { AuthContext } from '../../context/AuthContext';
+import orderService from '../../services/orderService';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
+import StatusBadge from '../../components/common/StatusBadge';
 
 export const Profile = () => {
   const navigate = useNavigate();
@@ -64,36 +64,25 @@ export const Profile = () => {
   };
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem' }}>
+    <div className="container profile-container">
       {/* Profile Header */}
-      <div
-        className="glass-panel"
-        style={{
-          padding: '2rem',
-          marginBottom: '2.5rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '1.5rem',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+      <div className="glass-panel profile-header-card">
+        <div className="profile-user-left">
           <img
             src={user?.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80'}
             alt="Profile Avatar"
-            style={{ width: '72px', height: '72px', borderRadius: '50%', objectFit: 'cover', border: '2px solid var(--accent-pink)' }}
+            className="profile-avatar"
           />
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>{user?.name}</h2>
+            <div className="profile-user-heading">
+              <h2 className="profile-name">{user?.name}</h2>
               <StatusBadge status={user?.role} type="role" />
             </div>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', margin: 0 }}>{user?.email}</p>
+            <p className="profile-email">{user?.email}</p>
           </div>
         </div>
 
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        <div className="profile-header-actions">
           {user?.role === 'admin' && (
             <Button variant="outline" size="sm" onClick={() => navigate('/admin')}>
               Admin Portal
@@ -114,20 +103,11 @@ export const Profile = () => {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '1rem', borderBottom: '1px solid var(--border-color)', marginBottom: '2rem' }}>
+      <div className="profile-tabs-nav">
         <button
           type="button"
           onClick={() => setActiveTab('orders')}
-          style={{
-            padding: '0.75rem 1.5rem',
-            fontWeight: 800,
-            fontSize: '1rem',
-            color: activeTab === 'orders' ? 'var(--accent-pink)' : 'var(--text-muted)',
-            borderBottom: activeTab === 'orders' ? '3px solid var(--accent-pink)' : 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-          }}
+          className={`profile-tab-btn ${activeTab === 'orders' ? 'profile-tab-btn-active' : ''}`}
         >
           <FaBox size={16} /> My Orders ({orders.length})
         </button>
@@ -135,16 +115,7 @@ export const Profile = () => {
         <button
           type="button"
           onClick={() => setActiveTab('settings')}
-          style={{
-            padding: '0.75rem 1.5rem',
-            fontWeight: 800,
-            fontSize: '1rem',
-            color: activeTab === 'settings' ? 'var(--accent-pink)' : 'var(--text-muted)',
-            borderBottom: activeTab === 'settings' ? '3px solid var(--accent-pink)' : 'none',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-          }}
+          className={`profile-tab-btn ${activeTab === 'settings' ? 'profile-tab-btn-active' : ''}`}
         >
           <FaUser size={16} /> Account Settings
         </button>
@@ -160,8 +131,8 @@ export const Profile = () => {
           ) : orders.length === 0 ? (
             <div className="empty-orders-view">
               <div className="empty-icon">📦</div>
-              <h3 style={{ fontWeight: 800 }}>No Past Orders Yet</h3>
-              <p style={{ color: 'var(--text-muted)', margin: '0.5rem 0 1.5rem' }}>
+              <h3 className="empty-title">No Past Orders Yet</h3>
+              <p className="empty-desc">
                 Your completed purchases and deliveries will appear here.
               </p>
               <Link to="/category/all">
@@ -169,33 +140,22 @@ export const Profile = () => {
               </Link>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            <div className="profile-orders-list">
               {orders.map((order) => (
-                <div key={order.id} className="glass-panel" style={{ padding: '1.75rem' }}>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      borderBottom: '1px solid var(--border-color)',
-                      paddingBottom: '1rem',
-                      marginBottom: '1.25rem',
-                      flexWrap: 'wrap',
-                      gap: '0.75rem',
-                    }}
-                  >
+                <div key={order.id} className="glass-panel profile-order-card">
+                  <div className="profile-order-header">
                     <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-main)' }}>Order #{order.id}</span>
+                      <div className="profile-order-id-wrap">
+                        <span className="profile-order-id">Order #{order.id}</span>
                         <StatusBadge status={order.status} type="order" />
                       </div>
-                      <div style={{ fontSize: '0.8rem', color: 'var(--text-dim)', marginTop: '0.2rem' }}>
+                      <div className="profile-order-date">
                         Placed on {new Date(order.createdAt).toLocaleDateString()}
                       </div>
                     </div>
 
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <span style={{ fontSize: '1.2rem', fontWeight: 900, color: 'var(--accent-pink)' }}>
+                    <div className="profile-order-meta-right">
+                      <span className="profile-order-total">
                         ${order.total?.toFixed(2)}
                       </span>
                       <Link to={`/track-order?tracking=${order.trackingNumber}`}>
@@ -207,17 +167,17 @@ export const Profile = () => {
                   </div>
 
                   {/* Items */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                  <div className="profile-order-items">
                     {order.items?.map((item, idx) => (
-                      <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                      <div key={idx} className="profile-order-item">
                         <img
                           src={item.image}
                           alt={item.title}
-                          style={{ width: '52px', height: '52px', borderRadius: 'var(--radius-sm)', objectFit: 'cover' }}
+                          className="profile-item-img"
                         />
-                        <div style={{ flex: 1, minWidth: 0 }}>
-                          <h5 style={{ fontSize: '0.9rem', fontWeight: 700, margin: 0, color: 'var(--text-main)' }}>{item.title}</h5>
-                          <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                        <div className="profile-item-info">
+                          <h5 className="profile-item-title">{item.title}</h5>
+                          <span className="profile-item-qty">
                             Qty: {item.quantity} × ${item.price.toFixed(2)}
                           </span>
                         </div>
@@ -233,26 +193,13 @@ export const Profile = () => {
 
       {/* Settings Tab Content */}
       {activeTab === 'settings' && (
-        <div className="glass-panel" style={{ padding: '2rem', maxWidth: '640px' }}>
-          <h3 style={{ fontSize: '1.25rem', fontWeight: 800, marginBottom: '1.5rem', color: 'var(--text-main)' }}>
+        <div className="glass-panel profile-settings-card">
+          <h3 className="settings-card-title">
             Update Profile Information
           </h3>
 
           {saveSuccess && (
-            <div
-              style={{
-                padding: '0.75rem 1rem',
-                borderRadius: 'var(--radius-md)',
-                background: 'rgba(5, 150, 105, 0.1)',
-                border: '1px solid rgba(5, 150, 105, 0.25)',
-                color: 'var(--accent-emerald)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                marginBottom: '1.5rem',
-                fontWeight: 600,
-              }}
-            >
+            <div className="settings-success-alert">
               <FaCheckCircle size={16} /> Profile details saved successfully!
             </div>
           )}
@@ -300,7 +247,7 @@ export const Profile = () => {
               variant="primary"
               size="md"
               isLoading={saving}
-              style={{ marginTop: '0.5rem' }}
+              className="settings-save-btn"
             >
               Save Profile
             </Button>

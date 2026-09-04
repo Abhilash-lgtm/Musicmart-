@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaMusic, FaLock, FaEnvelope, FaUser, FaPhone, FaArrowRight, FaShieldAlt } from 'react-icons/fa';
-import { AuthContext } from '../context/AuthContext';
-import Input from './Input';
-import Button from './Button';
+import { AuthContext } from '../../context/AuthContext';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -61,55 +61,28 @@ export const Register = () => {
   };
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem 1.5rem',
-        background: 'radial-gradient(circle at top, rgba(2, 132, 199, 0.08) 0%, var(--bg-primary) 70%)',
-      }}
-    >
-      <div
-        className="glass-panel animate-fade-in"
-        style={{
-          width: '100%',
-          maxWidth: '520px',
-          padding: '2.5rem',
-          boxShadow: 'var(--shadow-lg)',
-        }}
-      >
+    <div className="auth-page-wrapper auth-page-register">
+      <div className="glass-panel animate-fade-in auth-card auth-card-wide">
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
+        <div className="auth-header">
+          <Link to="/" className="auth-brand-link">
             <div className="brand-icon-wrapper">
               <FaMusic size={20} />
             </div>
-            <span style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--text-main)' }}>
-              Music<span style={{ color: 'var(--accent-pink)' }}>Mart</span>
+            <span className="auth-brand-text">
+              Music<span className="brand-pink">Mart</span>
             </span>
           </Link>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.4rem', color: 'var(--text-main)' }}>
+          <h2 className="auth-title">
             Create an Account
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+          <p className="auth-subtitle">
             Join thousands of musicians and access premium gear today.
           </p>
         </div>
 
         {error && (
-          <div
-            style={{
-              padding: '0.75rem 1rem',
-              borderRadius: 'var(--radius-md)',
-              background: 'rgba(239, 68, 68, 0.1)',
-              border: '1px solid rgba(239, 68, 68, 0.25)',
-              color: '#dc2626',
-              fontSize: '0.85rem',
-              marginBottom: '1.25rem',
-            }}
-          >
+          <div className="auth-error-alert">
             {error}
           </div>
         )}
@@ -125,7 +98,7 @@ export const Register = () => {
             required
           />
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="form-grid-2col">
             <Input
               label="Email Address"
               type="email"
@@ -147,7 +120,7 @@ export const Register = () => {
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <div className="form-grid-2col">
             <Input
               label="Password"
               type="password"
@@ -172,23 +145,11 @@ export const Register = () => {
 
           <div className="form-group">
             <label className="form-label">Account Role</label>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+            <div className="role-selector-grid">
               <button
                 type="button"
                 onClick={() => setFormData({ ...formData, role: 'customer' })}
-                style={{
-                  padding: '0.75rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: `1px solid ${formData.role === 'customer' ? 'var(--accent-pink)' : 'var(--border-color)'}`,
-                  background: formData.role === 'customer' ? 'rgba(225, 29, 72, 0.08)' : '#ffffff',
-                  color: formData.role === 'customer' ? 'var(--accent-pink)' : 'var(--text-muted)',
-                  fontWeight: 700,
-                  fontSize: '0.875rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                }}
+                className={`role-btn ${formData.role === 'customer' ? 'role-btn-customer-active' : ''}`}
               >
                 <FaUser size={14} /> Customer
               </button>
@@ -196,19 +157,7 @@ export const Register = () => {
               <button
                 type="button"
                 onClick={() => setFormData({ ...formData, role: 'admin' })}
-                style={{
-                  padding: '0.75rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: `1px solid ${formData.role === 'admin' ? 'var(--accent-cyan)' : 'var(--border-color)'}`,
-                  background: formData.role === 'admin' ? 'rgba(2, 132, 199, 0.08)' : '#ffffff',
-                  color: formData.role === 'admin' ? 'var(--accent-cyan)' : 'var(--text-muted)',
-                  fontWeight: 700,
-                  fontSize: '0.875rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '0.5rem',
-                }}
+                className={`role-btn ${formData.role === 'admin' ? 'role-btn-admin-active' : ''}`}
               >
                 <FaShieldAlt size={14} /> Store Admin
               </button>
@@ -220,16 +169,16 @@ export const Register = () => {
             variant="primary"
             size="lg"
             isLoading={loading}
-            style={{ width: '100%', marginTop: '0.5rem' }}
+            className="auth-submit-btn"
             icon={FaArrowRight}
           >
             Create Account
           </Button>
         </form>
 
-        <div style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
+        <div className="auth-footer-text">
           Already have an account?{' '}
-          <Link to="/login" style={{ color: 'var(--accent-pink)', fontWeight: 700 }}>
+          <Link to="/login" className="auth-switch-link">
             Sign in
           </Link>
         </div>

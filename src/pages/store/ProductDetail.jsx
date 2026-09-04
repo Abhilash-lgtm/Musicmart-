@@ -12,11 +12,11 @@ import {
   FaMinus,
   FaPlus,
 } from 'react-icons/fa';
-import productService from '../services/productService';
-import { CartContext } from '../context/CartContext';
-import { WishlistContext } from '../context/WishlistContext';
-import Button from './Button';
-import StatusBadge from './StatusBadge';
+import productService from '../../services/productService';
+import { CartContext } from '../../context/CartContext';
+import { WishlistContext } from '../../context/WishlistContext';
+import Button from '../../components/ui/Button';
+import StatusBadge from '../../components/common/StatusBadge';
 
 export const ProductDetail = () => {
   const { id } = useParams();
@@ -58,9 +58,9 @@ export const ProductDetail = () => {
 
   if (!product) {
     return (
-      <div className="container" style={{ padding: '5rem 1.5rem', textAlign: 'center' }}>
+      <div className="container detail-notfound">
         <h2>Instrument Not Found</h2>
-        <p style={{ color: 'var(--text-muted)', margin: '1rem 0 2rem' }}>
+        <p className="detail-notfound-desc">
           The instrument you are looking for may have been retired from the catalog.
         </p>
         <Link to="/category/all">
@@ -80,20 +80,10 @@ export const ProductDetail = () => {
   };
 
   return (
-    <div className="container" style={{ padding: '2rem 1.5rem' }}>
+    <div className="container detail-container">
       {/* Back button */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <button
-          onClick={() => navigate(-1)}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            color: 'var(--text-muted)',
-            fontSize: '0.9rem',
-            fontWeight: 600,
-          }}
-        >
+      <div className="detail-back-wrap">
+        <button onClick={() => navigate(-1)} className="back-btn">
           <FaArrowLeft size={14} /> Back to Search
         </button>
       </div>
@@ -108,54 +98,31 @@ export const ProductDetail = () => {
           />
 
           {images.length > 1 && (
-            <div style={{ display: 'flex', gap: '1rem' }}>
+            <div className="detail-thumbs-row">
               {images.map((imgUrl, idx) => (
                 <img
                   key={idx}
                   src={imgUrl}
                   alt={`Thumbnail ${idx}`}
                   onClick={() => setActiveImage(idx)}
-                  style={{
-                    width: '80px',
-                    height: '80px',
-                    borderRadius: 'var(--radius-md)',
-                    objectFit: 'cover',
-                    cursor: 'pointer',
-                    border: `2px solid ${activeImage === idx ? 'var(--accent-pink)' : '#e2e8f0'}`,
-                  }}
+                  className={`detail-thumb ${activeImage === idx ? 'detail-thumb-active' : ''}`}
                 />
               ))}
             </div>
           )}
 
           {/* Audio Tone Preview */}
-          <div
-            className="glass-panel"
-            style={{
-              padding: '1.25rem 1.5rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginTop: '1rem',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="glass-panel audio-preview-panel">
+            <div className="audio-preview-info">
               <div
-                style={{
-                  padding: '0.75rem',
-                  borderRadius: '50%',
-                  background: isPlayingAudio ? 'var(--accent-pink)' : 'var(--bg-elevated)',
-                  color: isPlayingAudio ? '#fff' : 'var(--text-main)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s',
-                }}
+                className={`audio-preview-icon ${isPlayingAudio ? 'audio-preview-icon-playing' : ''}`}
                 onClick={() => setIsPlayingAudio(!isPlayingAudio)}
               >
                 <FaVolumeUp size={18} />
               </div>
               <div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, margin: 0 }}>Audio Tone Sample Preview</h4>
-                <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
+                <h4 className="audio-preview-title">Audio Tone Sample Preview</h4>
+                <p className="audio-preview-desc">
                   {isPlayingAudio ? 'Playing Studio Recording...' : 'Click to hear raw instrument tone'}
                 </p>
               </div>
@@ -173,81 +140,64 @@ export const ProductDetail = () => {
 
         {/* Details & Purchase Actions */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: 800, color: 'var(--accent-cyan)', textTransform: 'uppercase' }}>
+          <div className="detail-header-meta">
+            <span className="detail-brand">
               {product.brand}
             </span>
             <StatusBadge status={product.stock} type="stock" />
           </div>
 
-          <h1 style={{ fontSize: '2rem', fontWeight: 900, lineHeight: 1.25, marginBottom: '1rem', color: 'var(--text-main)' }}>
+          <h1 className="detail-title">
             {product.title}
           </h1>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', marginBottom: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#f59e0b', fontWeight: 800 }}>
+          <div className="detail-meta-row">
+            <div className="detail-rating">
               <FaStar size={16} /> {product.rating}
             </div>
-            <span style={{ color: 'var(--text-dim)', fontSize: '0.9rem' }}>
+            <span className="detail-reviews-count">
               {product.reviewsCount} Customer Reviews
             </span>
-            <span style={{ color: 'var(--border-color)' }}>|</span>
-            <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+            <span className="detail-meta-sep">|</span>
+            <span className="detail-sku">
               SKU: MM-{product.id}-CERT
             </span>
           </div>
 
-          <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
-            <span style={{ fontSize: '2.25rem', fontWeight: 900, color: 'var(--text-main)' }}>
+          <div className="detail-price-row">
+            <span className="detail-price">
               ${product.price.toFixed(2)}
             </span>
             {product.originalPrice && (
-              <span style={{ fontSize: '1.25rem', color: 'var(--text-dim)', textDecoration: 'line-through' }}>
+              <span className="detail-old-price">
                 ${product.originalPrice.toFixed(2)}
               </span>
             )}
             {product.discount && (
-              <span
-                style={{
-                  fontSize: '0.85rem',
-                  fontWeight: 800,
-                  color: 'var(--accent-pink)',
-                  background: 'rgba(225, 29, 72, 0.1)',
-                  padding: '0.2rem 0.6rem',
-                  borderRadius: '999px',
-                }}
-              >
+              <span className="detail-discount-badge">
                 Save {product.discount}%
               </span>
             )}
           </div>
 
-          <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '2rem' }}>
+          <p className="detail-description">
             {product.description}
           </p>
 
           {/* Add to Cart Stepper & Button */}
-          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '2rem' }}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                background: '#ffffff',
-                border: '1px solid var(--border-color)',
-                borderRadius: 'var(--radius-md)',
-              }}
-            >
+          <div className="detail-actions-row">
+            <div className="stepper-box">
               <button
                 type="button"
-                style={{ padding: '0.75rem 1rem', color: 'var(--text-main)', fontSize: '1.1rem' }}
+                className="stepper-btn"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
               >
                 <FaMinus size={12} />
               </button>
-              <span style={{ padding: '0 0.75rem', fontWeight: 800 }}>{quantity}</span>
+              <span className="stepper-val">{quantity}</span>
               <button
                 type="button"
-                style={{ padding: '0.75rem 1rem', color: 'var(--text-main)', fontSize: '1.1rem' }}
+                className="stepper-btn"
                 onClick={() => setQuantity((q) => Math.min(product.stock || 10, q + 1))}
               >
                 <FaPlus size={12} />
@@ -259,15 +209,14 @@ export const ProductDetail = () => {
               size="lg"
               icon={added ? FaCheck : FaShoppingCart}
               onClick={handleAddToCart}
-              style={{ flex: 1 }}
+              className="btn-flex"
             >
               {added ? 'Added to Cart!' : 'Add to Shopping Bag'}
             </Button>
 
             <button
               type="button"
-              className={`nav-icon-btn ${inWishlist ? 'active' : ''}`}
-              style={{ width: '52px', height: '52px' }}
+              className={`nav-icon-btn wishlist-btn-large ${inWishlist ? 'active' : ''}`}
               onClick={() => toggleWishlist(product)}
               title="Save to Wishlist"
             >
@@ -276,31 +225,20 @@ export const ProductDetail = () => {
           </div>
 
           {/* Assurance Badges */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '1rem',
-              padding: '1.25rem',
-              borderRadius: 'var(--radius-md)',
-              background: '#f8fafc',
-              border: '1px solid var(--border-color)',
-              marginBottom: '2rem',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <FaTruck size={18} style={{ color: 'var(--accent-cyan)' }} />
+          <div className="assurance-grid">
+            <div className="assurance-item">
+              <FaTruck size={18} className="assurance-icon-cyan" />
               <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700 }}>Insured Shipping</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>Dispatched in 24h</div>
+                <div className="assurance-title">Insured Shipping</div>
+                <div className="assurance-desc">Dispatched in 24h</div>
               </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-              <FaShieldAlt size={18} style={{ color: 'var(--accent-emerald)' }} />
+            <div className="assurance-item">
+              <FaShieldAlt size={18} className="assurance-icon-emerald" />
               <div>
-                <div style={{ fontSize: '0.85rem', fontWeight: 700 }}>2-Year Warranty</div>
-                <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>100% Authorized</div>
+                <div className="assurance-title">2-Year Warranty</div>
+                <div className="assurance-desc">100% Authorized</div>
               </div>
             </div>
           </div>
@@ -308,7 +246,7 @@ export const ProductDetail = () => {
           {/* Technical Specifications */}
           {product.specs && Object.keys(product.specs).length > 0 && (
             <div>
-              <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.75rem', color: 'var(--text-main)' }}>
+              <h3 className="specs-heading">
                 Technical Specifications
               </h3>
               <table className="product-specs-table">
@@ -316,7 +254,7 @@ export const ProductDetail = () => {
                   {Object.entries(product.specs).map(([key, val]) => (
                     <tr key={key}>
                       <td>{key}</td>
-                      <td style={{ color: 'var(--text-main)', fontWeight: 600 }}>{val}</td>
+                      <td className="specs-val">{val}</td>
                     </tr>
                   ))}
                 </tbody>

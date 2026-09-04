@@ -7,11 +7,11 @@ import {
   FaTruck,
   FaLock,
 } from 'react-icons/fa';
-import { CartContext } from '../context/CartContext';
-import { AuthContext } from '../context/AuthContext';
-import orderService from '../services/orderService';
-import Input from './Input';
-import Button from './Button';
+import { CartContext } from '../../context/CartContext';
+import { AuthContext } from '../../context/AuthContext';
+import orderService from '../../services/orderService';
+import Input from '../../components/ui/Input';
+import Button from '../../components/ui/Button';
 
 export const Checkout = () => {
   const navigate = useNavigate();
@@ -89,60 +89,39 @@ export const Checkout = () => {
   // Order Confirmed Success Screen
   if (createdOrder) {
     return (
-      <div className="container" style={{ padding: '4rem 1.5rem', textAlign: 'center', maxWidth: '640px' }}>
-        <div className="glass-panel animate-fade-in" style={{ padding: '3rem 2rem' }}>
-          <div
-            style={{
-              width: '64px',
-              height: '64px',
-              borderRadius: '50%',
-              background: 'rgba(5, 150, 105, 0.1)',
-              color: 'var(--accent-emerald)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              margin: '0 auto 1.5rem',
-            }}
-          >
+      <div className="container checkout-success-container">
+        <div className="glass-panel animate-fade-in checkout-success-panel">
+          <div className="checkout-success-icon">
             <FaCheckCircle size={36} />
           </div>
 
-          <h1 style={{ fontSize: '1.85rem', fontWeight: 900, marginBottom: '0.5rem', color: 'var(--text-main)' }}>
+          <h1 className="checkout-success-title">
             Order Placed Successfully!
           </h1>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+          <p className="checkout-success-desc">
             Thank you, {createdOrder.customerName}. Your music gear order is now being processed.
           </p>
 
-          <div
-            style={{
-              background: '#f8fafc',
-              border: '1px solid var(--border-color)',
-              borderRadius: 'var(--radius-md)',
-              padding: '1.25rem',
-              marginBottom: '2rem',
-              textAlign: 'left',
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Order Reference:</span>
-              <span style={{ fontWeight: 800, color: 'var(--text-main)' }}>{createdOrder.id}</span>
+          <div className="checkout-receipt-box">
+            <div className="checkout-receipt-row">
+              <span className="receipt-label">Order Reference:</span>
+              <span className="receipt-val">{createdOrder.id}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Tracking Code:</span>
-              <span style={{ fontWeight: 800, color: 'var(--accent-cyan)' }}>
+            <div className="checkout-receipt-row">
+              <span className="receipt-label">Tracking Code:</span>
+              <span className="receipt-val-cyan">
                 {createdOrder.trackingNumber}
               </span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ color: 'var(--text-muted)' }}>Total Amount:</span>
-              <span style={{ fontWeight: 900, color: 'var(--accent-pink)' }}>
+            <div className="checkout-receipt-row">
+              <span className="receipt-label">Total Amount:</span>
+              <span className="receipt-val-pink">
                 ${createdOrder.total.toFixed(2)}
               </span>
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+          <div className="checkout-actions-row">
             <Link to={`/track-order?tracking=${createdOrder.trackingNumber}`}>
               <Button variant="primary" size="md" icon={FaTruck}>
                 Track Live Order
@@ -161,9 +140,9 @@ export const Checkout = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className="container" style={{ padding: '5rem 1.5rem', textAlign: 'center' }}>
+      <div className="container checkout-empty-container">
         <h2>Your Cart is Empty</h2>
-        <p style={{ color: 'var(--text-muted)', margin: '1rem 0 2rem' }}>
+        <p className="checkout-empty-desc">
           Please add items to your cart before proceeding to checkout.
         </p>
         <Link to="/category/all">
@@ -174,49 +153,28 @@ export const Checkout = () => {
   }
 
   return (
-    <div className="container" style={{ padding: '3rem 1.5rem' }}>
-      <h1 style={{ fontSize: '2rem', fontWeight: 900, marginBottom: '2rem', color: 'var(--text-main)' }}>
+    <div className="container checkout-page-container">
+      <h1 className="checkout-main-title">
         Secure <span className="text-gradient">Checkout</span>
       </h1>
 
       {error && (
-        <div
-          style={{
-            padding: '1rem',
-            borderRadius: 'var(--radius-md)',
-            background: 'rgba(239, 68, 68, 0.1)',
-            border: '1px solid rgba(239, 68, 68, 0.25)',
-            color: '#dc2626',
-            marginBottom: '2rem',
-          }}
-        >
+        <div className="checkout-error-banner">
           {error}
         </div>
       )}
 
       <form onSubmit={handlePlaceOrder}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '2.5rem', alignItems: 'flex-start' }}>
+        <div className="checkout-form-grid">
           {/* Form */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <div className="checkout-steps-col">
             {/* Step 1: Shipping Address */}
-            <div className="glass-panel" style={{ padding: '1.75rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <div
-                  style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: 'var(--accent-pink)',
-                    color: '#fff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 800,
-                  }}
-                >
+            <div className="glass-panel checkout-step-card">
+              <div className="checkout-step-header">
+                <div className="checkout-step-number">
                   1
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: 'var(--text-main)' }}>Shipping Address</h3>
+                <h3 className="checkout-step-title">Shipping Address</h3>
               </div>
 
               <Input
@@ -227,7 +185,7 @@ export const Checkout = () => {
                 required
               />
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-2col">
                 <Input
                   label="Email for Updates"
                   type="email"
@@ -255,7 +213,7 @@ export const Checkout = () => {
                 required
               />
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+              <div className="form-grid-3col">
                 <Input
                   label="City"
                   name="city"
@@ -281,45 +239,21 @@ export const Checkout = () => {
             </div>
 
             {/* Step 2: Payment Method */}
-            <div className="glass-panel" style={{ padding: '1.75rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <div
-                  style={{
-                    width: '32px',
-                    height: '32px',
-                    borderRadius: '50%',
-                    background: 'var(--accent-cyan)',
-                    color: '#fff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 800,
-                  }}
-                >
+            <div className="glass-panel checkout-step-card">
+              <div className="checkout-step-header">
+                <div className="checkout-step-number checkout-step-number-cyan">
                   2
                 </div>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, margin: 0, color: 'var(--text-main)' }}>Payment Method</h3>
+                <h3 className="checkout-step-title">Payment Method</h3>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+              <div className="payment-methods-grid">
                 {['Credit Card', 'PayPal', 'UPI / NetBanking', 'Cash on Delivery'].map((method) => (
                   <button
                     key={method}
                     type="button"
                     onClick={() => setFormData({ ...formData, paymentMethod: method })}
-                    style={{
-                      padding: '1rem',
-                      borderRadius: 'var(--radius-md)',
-                      border: `1px solid ${formData.paymentMethod === method ? 'var(--accent-pink)' : 'var(--border-color)'}`,
-                      background: formData.paymentMethod === method ? 'rgba(225, 29, 72, 0.08)' : '#ffffff',
-                      color: formData.paymentMethod === method ? 'var(--accent-pink)' : 'var(--text-main)',
-                      fontWeight: 700,
-                      textAlign: 'left',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.75rem',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
-                    }}
+                    className={`payment-method-btn ${formData.paymentMethod === method ? 'payment-method-btn-selected' : ''}`}
                   >
                     <FaCreditCard size={16} /> {method}
                   </button>
@@ -327,7 +261,7 @@ export const Checkout = () => {
               </div>
 
               {formData.paymentMethod === 'Credit Card' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div className="credit-card-form">
                   <Input
                     label="Card Number"
                     name="cardNumber"
@@ -335,7 +269,7 @@ export const Checkout = () => {
                     onChange={handleChange}
                     icon={FaLock}
                   />
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                  <div className="form-grid-2col">
                     <Input
                       label="Expiry Date"
                       name="cardExp"
@@ -355,54 +289,54 @@ export const Checkout = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="glass-panel" style={{ padding: '1.75rem', position: 'sticky', top: '90px' }}>
-            <h3 style={{ fontSize: '1.2rem', fontWeight: 800, marginBottom: '1.25rem', color: 'var(--text-main)' }}>
+          <div className="glass-panel checkout-review-card">
+            <h3 className="checkout-review-title">
               Review Items ({cartItems.length})
             </h3>
 
-            <div style={{ maxHeight: '240px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+            <div className="checkout-review-items">
               {cartItems.map((item) => (
-                <div key={item.id} style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                <div key={item.id} className="checkout-review-item">
                   <img
                     src={item.image}
                     alt={item.title}
-                    style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-sm)', objectFit: 'cover' }}
+                    className="checkout-review-thumb"
                   />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--text-main)' }}>
+                  <div className="checkout-review-info">
+                    <div className="checkout-review-name">
                       {item.title}
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
+                    <div className="checkout-review-qty">
                       Qty: {item.quantity} × ${item.price.toFixed(2)}
                     </div>
                   </div>
-                  <div style={{ fontSize: '0.9rem', fontWeight: 800, color: 'var(--text-main)' }}>
+                  <div className="checkout-review-price">
                     ${(item.price * item.quantity).toFixed(2)}
                   </div>
                 </div>
               ))}
             </div>
 
-            <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.65rem', fontSize: '0.9rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+            <div className="checkout-summary-lines">
+              <div className="summary-line">
                 <span>Subtotal</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
               {discountPercent > 0 && (
-                <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--accent-pink)', fontWeight: 600 }}>
+                <div className="summary-line-discount">
                   <span>Discount</span>
                   <span>-${discountAmount.toFixed(2)}</span>
                 </div>
               )}
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+              <div className="summary-line">
                 <span>Shipping</span>
                 <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
+              <div className="summary-line">
                 <span>Tax (8%)</span>
                 <span>${tax.toFixed(2)}</span>
               </div>
-              <div style={{ borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem', display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 900 }}>
+              <div className="summary-total-line">
                 <span>Total</span>
                 <span className="text-gradient">${total.toFixed(2)}</span>
               </div>
@@ -413,7 +347,7 @@ export const Checkout = () => {
               variant="primary"
               size="lg"
               isLoading={isProcessing}
-              style={{ width: '100%', marginTop: '1.5rem' }}
+              className="checkout-submit-btn"
               icon={FaShieldAlt}
             >
               Place Order & Pay

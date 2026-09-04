@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FaBell, FaCircle } from 'react-icons/fa';
-import { AuthContext } from '../context/AuthContext';
+import { AuthContext } from '../../context/AuthContext';
 
 export const AdminHeader = ({ title = 'Administration' }) => {
   const { user } = useContext(AuthContext);
