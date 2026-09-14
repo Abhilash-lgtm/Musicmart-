@@ -83,7 +83,7 @@ export const Cart = () => {
                   <Link to={`/product/${item.id}`} className="cart-item-link">{item.title}</Link>
                 </h4>
                 <div className="cart-item-unitprice">
-                  ${item.price.toFixed(2)}
+                  ₹{item.price.toFixed(2)}
                 </div>
               </div>
 
@@ -111,7 +111,7 @@ export const Cart = () => {
               {/* Subtotal */}
               <div className="cart-item-subtotal-box">
                 <div className="cart-item-subtotal-price">
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ₹{(item.price * item.quantity).toFixed(2)}
                 </div>
               </div>
 
@@ -137,29 +137,29 @@ export const Cart = () => {
           <div className="cart-summary-lines">
             <div className="summary-line">
               <span>Subtotal</span>
-              <span className="summary-val-main">${subtotal.toFixed(2)}</span>
+              <span className="summary-val-main">₹{subtotal.toFixed(2)}</span>
             </div>
 
             {discountPercent > 0 && (
               <div className="summary-line-discount">
                 <span>Promo Discount ({couponCode} - {discountPercent}%)</span>
-                <span>-${discountAmount.toFixed(2)}</span>
+                <span>-₹{discountAmount.toFixed(2)}</span>
               </div>
             )}
 
             <div className="summary-line">
               <span>Insured Shipping</span>
-              <span>{shipping === 0 ? <span className="summary-val-free">FREE</span> : `$${shipping.toFixed(2)}`}</span>
+              <span>{shipping === 0 ? <span className="summary-val-free">FREE</span> : `₹${shipping.toFixed(2)}`}</span>
             </div>
 
             <div className="summary-line">
               <span>Estimated Sales Tax</span>
-              <span className="summary-val-main">${tax.toFixed(2)}</span>
+              <span className="summary-val-main">₹{tax.toFixed(2)}</span>
             </div>
 
             <div className="summary-total-line">
               <span>Order Total</span>
-              <span className="text-gradient">${total.toFixed(2)}</span>
+              <span className="text-gradient">₹{total.toFixed(2)}</span>
             </div>
           </div>
 

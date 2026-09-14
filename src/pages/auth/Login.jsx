@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaMusic, FaLock, FaEnvelope, FaArrowRight, FaShieldAlt, FaUserCheck } from 'react-icons/fa';
+import { FaMusic, FaLock, FaEnvelope, FaArrowRight, FaArrowLeft, FaShieldAlt, FaUserCheck } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
@@ -16,6 +16,14 @@ export const Login = () => {
   const [error, setError] = useState('');
 
   const redirectPath = location.state?.from?.pathname || '/';
+
+  const handleBack = () => {
+    if (window.history.state && window.history.state.idx > 0) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,6 +64,18 @@ export const Login = () => {
   return (
     <div className="auth-page-wrapper auth-page-login">
       <div className="glass-panel animate-fade-in auth-card">
+        {/* Back navigation */}
+        <div className="auth-back-wrap">
+          <button
+            type="button"
+            onClick={handleBack}
+            className="back-btn"
+            aria-label="Go back"
+          >
+            <FaArrowLeft size={14} /> Back
+          </button>
+        </div>
+
         {/* Header */}
         <div className="auth-header">
           <Link to="/" className="auth-brand-link">
@@ -72,39 +92,6 @@ export const Login = () => {
           <p className="auth-subtitle">
             Log in to manage your orders, wishlist, and instruments.
           </p>
-        </div>
-
-        {/* Demo Fast Login Buttons */}
-        <div className="auth-demo-box">
-          <div className="auth-demo-label">
-            Quick Demo 1-Click Login
-          </div>
-          <div className="auth-demo-grid">
-            <Button
-              variant="outline"
-              size="sm"
-              icon={FaShieldAlt}
-              onClick={() => handleDemoLogin('admin')}
-              disabled={loading}
-            >
-              Demo Admin
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              icon={FaUserCheck}
-              onClick={() => handleDemoLogin('customer')}
-              disabled={loading}
-            >
-              Demo Customer
-            </Button>
-          </div>
-        </div>
-
-        <div className="auth-divider-row">
-          <div className="auth-divider-line" />
-          <span className="auth-divider-text">OR WITH EMAIL</span>
-          <div className="auth-divider-line" />
         </div>
 
         {error && (

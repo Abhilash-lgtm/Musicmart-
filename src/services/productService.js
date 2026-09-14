@@ -37,6 +37,7 @@ export const productService = {
       return products;
     } catch {
       let products = JSON.parse(localStorage.getItem('mm_products') || JSON.stringify(initialMockData.products));
+      products = products.filter((p) => String(p.id) !== '7' && !p.title?.toLowerCase().includes('montage 8'));
       if (category && category !== 'all') {
         products = products.filter((p) => p.category.toLowerCase() === category.toLowerCase());
       }

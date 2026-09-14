@@ -143,7 +143,7 @@ export const ProductList = () => {
                   <td>
                     <span className="table-category-tag">{p.category}</span>
                   </td>
-                  <td className="table-price-val">${p.price?.toFixed(2)}</td>
+                  <td className="table-price-val">₹{p.price?.toFixed(2)}</td>
                   <td>
                     <StatusBadge status={p.stock} type="stock" />
                   </td>

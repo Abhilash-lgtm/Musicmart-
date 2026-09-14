@@ -95,7 +95,7 @@ export const Wishlist = () => {
 
               <div className="product-card-footer">
                 <div className="product-price-box">
-                  <span className="product-price">${product.price.toFixed(2)}</span>
+                  <span className="product-price">₹{product.price.toFixed(2)}</span>
                 </div>
 
                 <Button

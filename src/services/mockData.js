@@ -3,7 +3,7 @@
 export const initialMockData = {
   categories: [
     { id: 'guitars', name: 'Guitars & Basses', itemCount: 6 },
-    { id: 'keyboards', name: 'Keyboards & Synths', itemCount: 5 },
+    { id: 'keyboards', name: 'Keyboards & Synths', itemCount: 4 },
     { id: 'drums', name: 'Drums & Percussion', itemCount: 4 },
     { id: 'audio', name: 'Studio & Microphones', itemCount: 5 },
     { id: 'wind', name: 'Wind Instruments', itemCount: 3 },
@@ -28,6 +28,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1564186763535-ebb21ef5277f?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Flagship electric guitar engineered for high-performance players, featuring Ultra Noiseless Vintage pickups, modern D-profile maple neck, and sculpted body contours.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=Nff_DmsC_gE',
       specs: {
         'Body Material': 'Select Alder',
         'Neck Profile': 'Modern D',
@@ -55,6 +56,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Timeless classic solid-body electric guitar with AA figured maple top, 60s SlimTaper mahogany neck, and Burstbucker 61 pickups capturing authentic vintage rock and blues tone.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=s0n_V3e1Y1s',
       specs: {
         'Top Wood': 'AA Figured Maple',
         'Body Material': 'Solid Mahogany',
@@ -82,6 +84,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1516924962500-2b4b3b99ea02?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Flagship acoustic-electric guitar featuring solid Indian Rosewood back and sides, Sitka spruce top, revolutionary V-Class bracing, and Expression System 2 onboard electronics.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=hUfD9uW_50w',
       specs: {
         'Top Wood': 'Solid Sitka Spruce',
         'Back & Sides': 'Solid Indian Rosewood',
@@ -109,6 +112,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1550291652-6ea9114a47b1?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'The quintessential PRS electric guitar with carved figured maple 10-top, mahogany body, Pattern Thin neck, and versatile 85/15 pickups with 5-way blade switching.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=B7bZpT0LzYw',
       specs: {
         'Top Wood': 'Carved Figured Maple 10-Top',
         'Body Wood': 'Mahogany',
@@ -135,6 +139,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1558098329-a11cff621064?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Iconic 4-string electric bass delivering punchy, foundation-shaking low end with V-Mod II split single-coil precision pickups and sculpted neck heel.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=Vl3rE_lqXvE',
       specs: {
         'Body Material': 'Alder',
         'Neck Profile': '1963 "C" Profile',
@@ -160,6 +165,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'High-precision Japanese-crafted electric guitar equipped with Fishman Fluence Modern active humbuckers, Lo-Pro Edge tremolo, and lightning-fast Super Wizard HP neck.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=3g_uX9XJt_E',
       specs: {
         'Neck': 'Super Wizard HP 5pc Maple/Wenge',
         'Body': 'Ash Top / African Mahogany Body',
@@ -170,32 +176,6 @@ export const initialMockData = {
     },
 
     // KEYBOARDS & SYNTHS
-    {
-      id: '7',
-      title: 'Yamaha Montage 8 Synthesizer Workstation',
-      brand: 'Yamaha',
-      category: 'keyboards',
-      price: 3499.99,
-      originalPrice: 3899.99,
-      stock: 4,
-      discount: 10,
-      rating: 5.0,
-      reviewsCount: 71,
-      image: 'https://images.unsplash.com/photo-1520523839898-507127053c17?w=800&auto=format&fit=crop&q=80',
-      images: [
-        'https://images.unsplash.com/photo-1520523839898-507127053c17?w=800&auto=format&fit=crop&q=80',
-        'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&auto=format&fit=crop&q=80',
-      ],
-      description: 'Professional 88-key weighted action synthesizer workstation powered by Motion Control Synthesis Engine combining AWM2 sample architecture and pure FM-X frequency modulation.',
-      specs: {
-        'Keybed': '88-Key Balanced Hammer Action with Aftertouch',
-        'Sound Engine': 'AWM2 (Sample) + FM-X (Frequency Modulation)',
-        'Polyphony': '128-Note Stereo AWM2 + 128-Note FM-X',
-        'Display': '7" Wide VGA Color Touchscreen',
-        'Controls': 'Super Knob, 8 Motion Sequence Sliders, Ribbon Controller',
-      },
-    },
-
     {
       id: '8',
       title: 'Nord Stage 4 88 Stage Keyboard',
@@ -212,6 +192,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'The premier live performance keyboard featuring Triple Sensor hammer-action keybed, dedicated Piano, Organ, and Wave 2 Synth sections with physical drawbars and complete per-layer effects.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=t_u_K4bX_l0',
       specs: {
         'Keybed': '88-Key Triple Sensor Hammer Action',
         'Sections': 'Piano, Organ (B3/Vox/Farfisa), Wave 2 Synth Engine',
@@ -237,6 +218,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Streamlined modern creative synthesizer workstation with 88 weighted keys, ZEN-Core synthesis, acoustic SuperNATURAL pianos, 16 RGB sampler pads, and seamless DAW audio interfacing.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=YwV6u_aT_bI',
       specs: {
         'Keys': '88-Key PHA-4 Standard Escapement Keybed',
         'Sound Engines': 'ZEN-Core, SuperNATURAL Acoustic & Electric Piano',
@@ -262,6 +244,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Paraphonic dual-oscillator analog synthesizer with multidrive ladder filter, 37 semi-weighted keys with aftertouch, duo mode capability, and 256 programmable presets.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=2Iu_N_j5JkQ',
       specs: {
         'Sound Engine': '100% Discrete Analog',
         'Keys': '37 Semi-Weighted with Aftertouch',
@@ -287,6 +270,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Next-generation 4-voice polyphonic analog synthesizer with open digital multi-engine, 16-step motion sequencer, microtuning, and 32-bit digital effects processor.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=p4f_L0k9J2I',
       specs: {
         'Polyphony': '4 Voices',
         'Keys': '37 Slim-Key Velocity-Sensitive',
@@ -314,6 +298,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1543443374-b6fe10a6ab7b?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Professional mid-level V-Drums kit featuring state-of-the-art digital snare, ride, and hi-hat pads powered by the TD-27 sound module with Prismatic Sound Modeling.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=q6g_k1j3rW0',
       specs: {
         'Module': 'Roland TD-27 with PureAcoustic Ambience',
         'Snare': 'PD-140DS Digital 14" Mesh Snare',
@@ -339,6 +324,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1543443374-b6fe10a6ab7b?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Handcrafted North American hard rock maple drum shell pack with specialized SSC grain orientation, True-Pitch 50 tuning tension rods, and Collector\'s series chrome hardware.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=m7p_q8s5XwE',
       specs: {
         'Shell Material': '100% North American Hard Rock Maple',
         'Configuration': '10" & 12" Rack Toms, 16" Floor Tom, 22" Bass Drum, 14" Snare',
@@ -363,6 +349,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Cross-laminated EvenPly-Six North American maple shell pack tuned for touring musicians and studio recording seeking focused warm punch and projection.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=d_kS8R7xU9Y',
       specs: {
         'Shell Construction': '6-ply 5.4mm 100% Maple EvenPly',
         'Configuration': '10" & 12" Toms, 16" Floor Tom, 22" Kick Drum',
@@ -387,6 +374,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Handmade acoustic cajon crafted with resonant Baltic birch frontplate and body, dual internal snare wires, rounded corners, and padded non-slip top seating surface.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=7X5r_8aY_vE',
       specs: {
         'Body': 'Baltic Birch (Betula pendula)',
         'Frontplate': 'Siam Oak with Matte Satin Finish',
@@ -412,6 +400,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'The definitive gold standard large-diaphragm condenser studio vocal microphone worldwide, featuring dual-diaphragm capsule and omnidirectional, cardioid, and figure-8 switchable patterns.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=p7W2tqO9nC0',
       specs: {
         'Capsule': 'K 67 Dual-Diaphragm Pressure Gradient Transducer',
         'Polar Patterns': 'Cardioid, Omnidirectional, Figure-8',
@@ -437,6 +426,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Legendary broadcast, podcast, and studio vocal microphone with smooth, flat, wide-range frequency response, air-suspension shock isolation, and internal electromagnetic hum shielding.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=aG3mP9nL1xY',
       specs: {
         'Cartridge Type': 'Dynamic (Moving Coil)',
         'Polar Pattern': 'Cardioid Uniform with Frequency',
@@ -462,6 +452,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Desktop 10 x 6 Thunderbolt 3 audio interface with elite-class 24-bit/192 kHz audio conversion, two Unison-enabled mic preamps, and DUO Core real-time UAD plugin DSP processing.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=c8N4uY1E9k0',
       specs: {
         'Connectivity': 'Thunderbolt 3 (Bus-powered compatible)',
         'Audio Conversion': '24-Bit / 192 kHz Elite-Class Converters',
@@ -487,6 +478,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Industry benchmark 2-way bass-reflex bi-amplified nearfield active studio monitors featuring 8-inch cone woofer and 1-inch dome tweeter delivering uncompromised acoustic fidelity.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=fD6v0E4c6Z8',
       specs: {
         'Low-Frequency Driver': '8" Cone Woofer (75W)',
         'High-Frequency Driver': '1" Dome Tweeter (45W)',
@@ -512,6 +504,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Audiophile-grade open-back dynamic reference headphones engineered for mixing, mastering, and critical audio evaluation with hand-selected matched acoustic driver elements.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=K1pW-u6j8R4',
       specs: {
         'Transducer Principle': 'Dynamic, Open-Back',
         'Nominal Impedance': '300 Ohms',
@@ -538,6 +531,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1525994886773-080587e161c2?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'Modern classic professional alto saxophone featuring 62-style neck for rapid acoustic response, integrated key posts, and hand-engraved bell for warm rich tone.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=l4jB_vX5F5E',
       specs: {
         'Key': 'Eb',
         'Bell': 'One-Piece Hand-Engraved Yellow Brass',
@@ -563,6 +557,7 @@ export const initialMockData = {
         'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800&auto=format&fit=crop&q=80',
       ],
       description: 'The premier orchestral and jazz trumpet worldwide, featuring one-piece hand-hammered #37 yellow brass bell, Monel metal pistons, and brilliant silver-plated finish.',
+      youtubeUrl: 'https://www.youtube.com/watch?v=4dO8fF9Z6YQ',
       specs: {
         'Key': 'Bb',
         'Bore': '.459" Medium-Large Bore',
@@ -640,23 +635,23 @@ export const initialMockData = {
   users: [
     {
       id: '1',
-      name: 'Admin Bojja',
-      email: 'admin@musicmart.com',
-      password: 'adminpassword123',
+      name: 'Bojja',
+      email: 'musicmart123@gmail.com',
+      password: 'password123',
       role: 'admin',
-      phone: '+1 (555) 987-6543',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+      phone: '+91 778956123',
+      avatar: '',
       createdAt: '2026-01-10T10:00:00.000Z',
     },
 
     {
       id: '2',
-      name: 'Alex Johnson',
-      email: 'alex@example.com',
-      password: 'password123',
+      name: 'Abhilash',
+      email: 'abhilash456@gmail.com',
+      password: 'password456',
       role: 'customer',
-      phone: '+1 (555) 123-4567',
-      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80',
+      phone: '+91 778956123',
+      avatar: '',
       address: '742 Evergreen Terrace, Seattle, WA 98101, United States',
       createdAt: '2026-02-15T12:00:00.000Z',
     },
@@ -664,7 +659,7 @@ export const initialMockData = {
 };
 
 // Current catalog schema version. Bump this to automatically refresh browser cache.
-export const DATA_VERSION = 'v2.1';
+export const DATA_VERSION = 'v2.2';
 
 // Helper to initialize and synchronize local storage
 export const initLocalData = () => {
@@ -693,6 +688,22 @@ export const initLocalData = () => {
       );
     }
     localStorage.setItem('mm_data_version', DATA_VERSION);
+  }
+
+  // Explicit safeguard: ensure removed product 7 (Yamaha Montage 8) is never kept in localStorage
+  try {
+    const raw = localStorage.getItem('mm_products');
+    if (raw) {
+      const prods = JSON.parse(raw);
+      if (prods.some((p) => String(p.id) === '7' || p.title?.includes('Montage'))) {
+        localStorage.setItem(
+          'mm_products',
+          JSON.stringify(prods.filter((p) => String(p.id) !== '7' && !p.title?.includes('Montage')))
+        );
+      }
+    }
+  } catch {
+    // ignore
   }
 };
 

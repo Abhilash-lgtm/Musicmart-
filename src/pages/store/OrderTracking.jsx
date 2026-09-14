@@ -178,12 +178,12 @@ export const OrderTracking = () => {
                     <span className="manifest-item-title">
                       {item.quantity}x {item.title}
                     </span>
-                    <span className="manifest-item-price">${(item.price * item.quantity).toFixed(2)}</span>
+                    <span className="manifest-item-price">₹{(item.price * item.quantity).toFixed(2)}</span>
                   </div>
                 ))}
                 <div className="manifest-total-row">
                   <span>Total Paid</span>
-                  <span className="text-gradient">${order.total?.toFixed(2)}</span>
+                  <span className="text-gradient">₹{order.total?.toFixed(2)}</span>
                 </div>
               </div>
             </div>

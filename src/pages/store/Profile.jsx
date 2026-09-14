@@ -9,6 +9,9 @@ import {
   FaTruck,
   FaSignOutAlt,
   FaCheckCircle,
+  FaCamera,
+  FaTrash,
+  FaImage,
 } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 import orderService from '../../services/orderService';
@@ -29,9 +32,21 @@ export const Profile = () => {
     name: user?.name || '',
     phone: user?.phone || '',
     address: user?.address || '',
+    avatar: user?.avatar || '',
   });
   const [saving, setSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        name: user.name || '',
+        phone: user.phone || '',
+        address: user.address || '',
+        avatar: user.avatar || '',
+      });
+    }
+  }, [user]);
 
   useEffect(() => {
     const fetchUserOrders = async () => {
@@ -48,8 +63,35 @@ export const Profile = () => {
     fetchUserOrders();
   }, [user]);
 
+  const handleImageUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+      alert('Image size should be less than 2MB.');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFormData((prev) => ({ ...prev, avatar: reader.result }));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveAvatar = () => {
+    setFormData((prev) => ({ ...prev, avatar: '' }));
+  };
+
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
+
+    const phoneDigits = (formData.phone || '').replace(/\D/g, '');
+    if (formData.phone && phoneDigits.length < 10) {
+      alert('Phone number must be at least 10 digits.');
+      return;
+    }
+
     setSaving(true);
     setSaveSuccess(false);
     try {
@@ -68,11 +110,17 @@ export const Profile = () => {
       {/* Profile Header */}
       <div className="glass-panel profile-header-card">
         <div className="profile-user-left">
-          <img
-            src={user?.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&auto=format&fit=crop&q=80'}
-            alt="Profile Avatar"
-            className="profile-avatar"
-          />
+          {user?.avatar ? (
+            <img
+              src={user.avatar}
+              alt="Profile Avatar"
+              className="profile-avatar"
+            />
+          ) : (
+            <div className="profile-avatar profile-avatar-placeholder">
+              <FaUser size={34} />
+            </div>
+          )}
           <div>
             <div className="profile-user-heading">
               <h2 className="profile-name">{user?.name}</h2>
@@ -156,7 +204,7 @@ export const Profile = () => {
 
                     <div className="profile-order-meta-right">
                       <span className="profile-order-total">
-                        ${order.total?.toFixed(2)}
+                        ₹{order.total?.toFixed(2)}
                       </span>
                       <Link to={`/track-order?tracking=${order.trackingNumber}`}>
                         <Button variant="outline" size="sm" icon={FaTruck}>
@@ -178,7 +226,7 @@ export const Profile = () => {
                         <div className="profile-item-info">
                           <h5 className="profile-item-title">{item.title}</h5>
                           <span className="profile-item-qty">
-                            Qty: {item.quantity} × ${item.price.toFixed(2)}
+                            Qty: {item.quantity} × ₹{item.price.toFixed(2)}
                           </span>
                         </div>
                       </div>
@@ -205,6 +253,56 @@ export const Profile = () => {
           )}
 
           <form onSubmit={handleUpdateProfile}>
+            {/* Profile Picture Option */}
+            <div className="profile-avatar-edit-section">
+              <label className="form-label">Profile Image (Optional)</label>
+              <div className="profile-avatar-edit-row">
+                <div className="profile-avatar-preview-wrap">
+                  {formData.avatar ? (
+                    <img
+                      src={formData.avatar}
+                      alt="Preview"
+                      className="profile-avatar"
+                    />
+                  ) : (
+                    <div className="profile-avatar profile-avatar-placeholder">
+                      <FaUser size={34} />
+                    </div>
+                  )}
+                </div>
+                <div className="profile-avatar-edit-controls">
+                  <div className="profile-avatar-actions">
+                    <label className="btn btn-outline btn-sm profile-upload-label">
+                      <FaCamera size={13} /> Upload Photo
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        style={{ display: 'none' }}
+                      />
+                    </label>
+                    {formData.avatar && (
+                      <button
+                        type="button"
+                        onClick={handleRemoveAvatar}
+                        className="btn btn-outline btn-sm profile-remove-avatar-btn"
+                      >
+                        <FaTrash size={12} /> Remove
+                      </button>
+                    )}
+                  </div>
+                  <Input
+                    name="avatar"
+                    placeholder="Or enter image URL (https://...)"
+                    value={formData.avatar}
+                    onChange={(e) => setFormData({ ...formData, avatar: e.target.value })}
+                    icon={FaImage}
+                    className="profile-avatar-url-input"
+                  />
+                </div>
+              </div>
+            </div>
+
             <Input
               label="Full Name"
               name="name"
@@ -228,8 +326,9 @@ export const Profile = () => {
               type="tel"
               name="phone"
               value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value.replace(/[^\d+\s-]/g, '') })}
               icon={FaPhone}
+              maxLength={16}
             />
 
             <Input

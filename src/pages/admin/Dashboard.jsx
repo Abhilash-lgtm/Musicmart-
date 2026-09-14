@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
-  FaDollarSign,
+  FaRupeeSign,
   FaShoppingBag,
   FaBox,
   FaUsers,
@@ -75,11 +75,11 @@ export const Dashboard = () => {
         {/* Total Revenue */}
         <div className="metric-card animate-fade-in metric-card-revenue">
           <div className="metric-icon-box metric-icon-revenue">
-            <FaDollarSign size={24} />
+            <FaRupeeSign size={24} />
           </div>
           <div className="metric-data">
             <h3 className="metric-text-gradient-fire">
-              ${stats?.totalRevenue ? stats.totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
+              ₹{stats?.totalRevenue ? stats.totalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '0.00'}
             </h3>
             <p>Total Revenue</p>
           </div>
@@ -146,7 +146,7 @@ export const Dashboard = () => {
                 </div>
                 <div className="dashboard-order-right">
                   <div>
-                    <div className="dashboard-order-price">${order.total?.toFixed(2)}</div>
+                    <div className="dashboard-order-price">₹{order.total?.toFixed(2)}</div>
                     <StatusBadge status={order.status} type="order" />
                   </div>
                   <Button
@@ -181,7 +181,7 @@ export const Dashboard = () => {
                     {p.title}
                   </div>
                   <div className="dashboard-stock-meta">
-                    ${p.price.toFixed(2)} • {p.brand}
+                    ₹{p.price.toFixed(2)} • {p.brand}
                   </div>
                 </div>
 

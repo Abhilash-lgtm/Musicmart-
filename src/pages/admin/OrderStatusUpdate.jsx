@@ -157,14 +157,14 @@ export const OrderStatusUpdate = () => {
                   </div>
                 </div>
                 <div className="manifest-item-price-val">
-                  ${(item.price * item.quantity).toFixed(2)}
+                  ₹{(item.price * item.quantity).toFixed(2)}
                 </div>
               </div>
             ))}
           </div>
 
           <div className="manifest-total-summary">
-            Total Invoiced: <span className="text-gradient">${order.total?.toFixed(2)}</span>
+            Total Invoiced: <span className="text-gradient">₹{order.total?.toFixed(2)}</span>
           </div>
         </div>
       </div>

@@ -1,0 +1,15 @@
+npm run dev     -       http://localhost:5173.
+
+npm run server  -       json-server --watch data/data.json --port 5000
+npm run build   -
+powershell -Command "npx json-server --watch data/data.json --port 5000"
+npm run preview -
+npm run lint    -
+
+
+npm install (or npm i)          -   npm install <package-name>	Installs a new library into your project (e.g., npm install sweetalert2).
+npm install <package-name>      -   lib install
+npm install -D <package-name>	-   Installs a tool needed only during development (e.g. testing libraries or linters).
+npm uninstall <package-name>    -   emoves a library from your project and deletes it from package.json
+
+

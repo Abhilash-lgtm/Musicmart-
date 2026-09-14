@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FaSave, FaArrowLeft, FaPlus, FaTrash } from 'react-icons/fa';
+import { FaSave, FaArrowLeft, FaPlus, FaTrash, FaYoutube } from 'react-icons/fa';
 import productService from '../../services/productService';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
@@ -21,6 +21,7 @@ export const EditProduct = () => {
     originalPrice: '',
     stock: '',
     image: '',
+    youtubeUrl: '',
     description: '',
   });
 
@@ -38,6 +39,7 @@ export const EditProduct = () => {
           originalPrice: p.originalPrice ? String(p.originalPrice) : '',
           stock: String(p.stock || ''),
           image: p.image || '',
+          youtubeUrl: p.youtubeUrl || '',
           description: p.description || '',
         });
 
@@ -48,7 +50,7 @@ export const EditProduct = () => {
           }));
           setSpecList(specsArray);
         }
-      } catch (err) {
+      } catch {
         setError('Failed to fetch instrument details for editing');
       } finally {
         setLoading(false);
@@ -172,7 +174,7 @@ export const EditProduct = () => {
             </div>
 
             <Input
-              label="Retail Price ($)"
+              label="Retail Price (₹)"
               type="number"
               step="0.01"
               name="price"
@@ -198,6 +200,16 @@ export const EditProduct = () => {
             value={formData.image}
             onChange={handleChange}
             required
+          />
+
+          <Input
+            label="YouTube Video Demo URL / Video ID (Optional)"
+            type="text"
+            name="youtubeUrl"
+            placeholder="e.g. https://www.youtube.com/watch?v=... or 11-character Video ID"
+            value={formData.youtubeUrl}
+            onChange={handleChange}
+            icon={FaYoutube}
           />
 
           <Input

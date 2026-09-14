@@ -9,6 +9,7 @@ import {
   FaExternalLinkAlt,
   FaSignOutAlt,
   FaMusic,
+  FaUser,
 } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 
@@ -26,43 +27,40 @@ export const AdminSidebar = () => {
 
   return (
     <aside className="admin-sidebar">
-      {/* Brand Header */}
-      <div className="admin-sidebar-header">
-        <div className="brand-icon-wrapper admin-brand-icon">
-          <FaMusic size={16} />
-        </div>
-        <div>
-          <div className="admin-brand-title">
+      {/* Brand */}
+      <div className="admin-sidebar-brand">
+        <Link to="/admin" className="admin-brand-link">
+          <div className="brand-icon-wrapper">
+            <FaMusic size={18} />
+          </div>
+          <span className="admin-brand-text">
             Music<span className="brand-pink">Mart</span>
-          </div>
-          <div className="admin-brand-portal">
-            ADMIN PORTAL
-          </div>
-        </div>
+          </span>
+          <span className="admin-portal-badge">ADMIN</span>
+        </Link>
       </div>
 
       {/* Nav Menu */}
-      <nav className="admin-nav">
-        <div className="admin-nav-category">
-          Management
-        </div>
+      <nav className="admin-nav-menu">
+        <div className="admin-nav-label">Management</div>
+        {navItems.map((item) => {
+          const Icon = item.icon;
+          return (
+            <NavLink
+              key={item.path}
+              to={item.path}
+              end={item.end}
+              className={({ isActive }) =>
+                `admin-nav-item ${isActive ? 'admin-nav-item-active' : ''}`
+              }
+            >
+              <Icon size={16} />
+              <span>{item.label}</span>
+            </NavLink>
+          );
+        })}
 
-        {navItems.map((item) => (
-          <NavLink
-            key={item.path}
-            to={item.path}
-            end={item.end}
-            className={({ isActive }) => `admin-nav-item ${isActive ? 'active' : ''}`}
-          >
-            <item.icon size={16} />
-            <span>{item.label}</span>
-          </NavLink>
-        ))}
-
-        <div className="admin-nav-divider">
-          Storefront
-        </div>
-
+        <div className="admin-nav-label admin-nav-label-mt">Storefront</div>
         <Link to="/" className="admin-nav-item">
           <FaExternalLinkAlt size={15} />
           <span>View Live Store</span>
@@ -72,11 +70,17 @@ export const AdminSidebar = () => {
       {/* Footer Profile */}
       <div className="admin-profile-footer">
         <div className="admin-profile-user">
-          <img
-            src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'}
-            alt="Admin"
-            className="admin-profile-avatar"
-          />
+          {user?.avatar ? (
+            <img
+              src={user.avatar}
+              alt="Admin"
+              className="admin-profile-avatar"
+            />
+          ) : (
+            <div className="admin-profile-avatar admin-avatar-placeholder">
+              <FaUser size={14} />
+            </div>
+          )}
           <div className="admin-profile-meta">
             <div className="admin-profile-name">
               {user?.name || 'Administrator'}

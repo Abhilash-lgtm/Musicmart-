@@ -38,7 +38,13 @@ export const Checkout = () => {
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'phone') {
+      const filtered = value.replace(/[^\d+\s-]/g, '');
+      setFormData({ ...formData, [name]: filtered });
+      return;
+    }
+    setFormData({ ...formData, [name]: value });
   };
 
   const handlePlaceOrder = async (e) => {
@@ -46,6 +52,13 @@ export const Checkout = () => {
     if (cartItems.length === 0) return;
 
     setError('');
+
+    const phoneDigits = (formData.phone || '').replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+      setError('Please enter a valid phone number (at least 10 digits).');
+      return;
+    }
+
     setIsProcessing(true);
 
     try {
@@ -116,7 +129,7 @@ export const Checkout = () => {
             <div className="checkout-receipt-row">
               <span className="receipt-label">Total Amount:</span>
               <span className="receipt-val-pink">
-                ${createdOrder.total.toFixed(2)}
+                ₹{createdOrder.total.toFixed(2)}
               </span>
             </div>
           </div>
@@ -307,11 +320,11 @@ export const Checkout = () => {
                       {item.title}
                     </div>
                     <div className="checkout-review-qty">
-                      Qty: {item.quantity} × ${item.price.toFixed(2)}
+                      Qty: {item.quantity} × ₹{item.price.toFixed(2)}
                     </div>
                   </div>
                   <div className="checkout-review-price">
-                    ${(item.price * item.quantity).toFixed(2)}
+                    ₹{(item.price * item.quantity).toFixed(2)}
                   </div>
                 </div>
               ))}
@@ -320,25 +333,25 @@ export const Checkout = () => {
             <div className="checkout-summary-lines">
               <div className="summary-line">
                 <span>Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
+                <span>₹{subtotal.toFixed(2)}</span>
               </div>
               {discountPercent > 0 && (
                 <div className="summary-line-discount">
                   <span>Discount</span>
-                  <span>-${discountAmount.toFixed(2)}</span>
+                  <span>-₹{discountAmount.toFixed(2)}</span>
                 </div>
               )}
               <div className="summary-line">
                 <span>Shipping</span>
-                <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                <span>{shipping === 0 ? 'FREE' : `₹${shipping.toFixed(2)}`}</span>
               </div>
               <div className="summary-line">
                 <span>Tax (8%)</span>
-                <span>${tax.toFixed(2)}</span>
+                <span>₹{tax.toFixed(2)}</span>
               </div>
               <div className="summary-total-line">
                 <span>Total</span>
-                <span className="text-gradient">${total.toFixed(2)}</span>
+                <span className="text-gradient">₹{total.toFixed(2)}</span>
               </div>
             </div>
 

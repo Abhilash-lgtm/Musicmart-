@@ -45,8 +45,8 @@ export const AppRoutes = () => {
         <Route path="register" element={<Register />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         {/* Protected Admin Portal Layout */}
-        <Route path="admin"element={<ProtectedRoute requiredRole="admin"><AdminLayout /></ProtectedRoute>}>
-        <Route path="index" element={<Dashboard />} />
+        <Route path="admin" element={<ProtectedRoute requiredRole="admin"><AdminLayout /></ProtectedRoute>}>
+          <Route index element={<Dashboard />} />
         <Route path="users" element={<UserManagement />} />
         <Route path="products" element={<ProductList />} />
         <Route path="products/new" element={<AddProduct />} />

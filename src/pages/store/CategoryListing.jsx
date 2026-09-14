@@ -152,7 +152,7 @@ export const CategoryListing = () => {
               onChange={(e) => setMaxPrice(Number(e.target.value))}
               className="price-slider-input"
             />
-            <span className="price-slider-value">${maxPrice}</span>
+            <span className="price-slider-value">₹{maxPrice}</span>
           </div>
 
           <div className="sort-select-group">
@@ -252,9 +252,9 @@ export const CategoryListing = () => {
 
                   <div className="product-card-footer">
                     <div className="product-price-box">
-                      <span className="product-price">${product.price.toFixed(2)}</span>
+                      <span className="product-price">₹{product.price.toFixed(2)}</span>
                       {product.originalPrice && (
-                        <span className="product-old-price">${product.originalPrice.toFixed(2)}</span>
+                        <span className="product-old-price">₹{product.originalPrice.toFixed(2)}</span>
                       )}
                     </div>
 

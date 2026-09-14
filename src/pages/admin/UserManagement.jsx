@@ -116,11 +116,17 @@ export const UserManagement = () => {
                 <tr key={u.id}>
                   <td>
                     <div className="table-user-cell">
-                      <img
-                        src={u.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80'}
-                        alt={u.name}
-                        className="table-user-avatar"
-                      />
+                      {u.avatar ? (
+                        <img
+                          src={u.avatar}
+                          alt={u.name}
+                          className="table-user-avatar"
+                        />
+                      ) : (
+                        <div className="table-user-avatar table-avatar-placeholder">
+                          <FaUser size={13} />
+                        </div>
+                      )}
                       <span className="table-user-name">{u.name}</span>
                     </div>
                   </td>

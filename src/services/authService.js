@@ -11,7 +11,11 @@ export const authService = {
       if (!user) throw new Error('Invalid email or password');
       const token = `jwt-token-${user.id}-${Date.now()}`;
       return { user, token };
-    } catch {
+    } catch (err) {
+      if (err.message === 'Invalid email or password') {
+        throw err;
+      }
+      console.warn('Backend server (npm run server) not reachable. Checking local fallback.', err);
       // Local fallback
       const stored = JSON.parse(localStorage.getItem('mm_users') || JSON.stringify(initialMockData.users));
       const user = stored.find((u) => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
@@ -24,15 +28,25 @@ export const authService = {
   // Register new account
   async register(userData) {
     try {
+      // Check if email already registered in database
+      const checkRes = await api.get(`/users?email=${encodeURIComponent(userData.email)}`);
+      if (checkRes.data && checkRes.data.length > 0) {
+        throw new Error('Email already registered');
+      }
+
       const response = await api.post('/users', {
         ...userData,
-        avatar: userData.avatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80',
+        avatar: userData.avatar || '',
         createdAt: new Date().toISOString(),
       });
       const user = response.data;
       const token = `jwt-token-${user.id}-${Date.now()}`;
       return { user, token };
-    } catch {
+    } catch (err) {
+      if (err.message === 'Email already registered') {
+        throw err;
+      }
+      console.warn('Backend server (npm run server) not running on port 5000. Storing in browser localStorage fallback instead of data/data.json.', err);
       // Local fallback
       const stored = JSON.parse(localStorage.getItem('mm_users') || JSON.stringify(initialMockData.users));
       const exists = stored.some((u) => u.email.toLowerCase() === userData.email.toLowerCase());
@@ -40,7 +54,7 @@ export const authService = {
       const newUser = {
         id: String(Date.now()),
         ...userData,
-        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80',
+        avatar: userData.avatar || '',
         createdAt: new Date().toISOString(),
       };
       stored.push(newUser);

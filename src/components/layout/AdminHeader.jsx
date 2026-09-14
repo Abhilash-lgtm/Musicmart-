@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { FaBell, FaCircle } from 'react-icons/fa';
+import { FaBell, FaCircle, FaUser } from 'react-icons/fa';
 import { AuthContext } from '../../context/AuthContext';
 
 export const AdminHeader = ({ title = 'Administration' }) => {
@@ -28,11 +28,17 @@ export const AdminHeader = ({ title = 'Administration' }) => {
 
         {/* User Info */}
         <div className="admin-header-user">
-          <img
-            src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80'}
-            alt="Avatar"
-            className="admin-header-avatar"
-          />
+          {user?.avatar ? (
+            <img
+              src={user.avatar}
+              alt="Avatar"
+              className="admin-header-avatar"
+            />
+          ) : (
+            <div className="admin-header-avatar admin-avatar-placeholder">
+              <FaUser size={14} />
+            </div>
+          )}
           <div className="admin-header-userinfo">
             <span className="admin-header-username">{user?.name}</span>
             <span className="admin-header-userrole">Administrator</span>

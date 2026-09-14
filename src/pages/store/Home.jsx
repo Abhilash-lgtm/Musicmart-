@@ -6,10 +6,6 @@ import {
   FaDrum,
   FaMicrophone,
   FaArrowRight,
-  FaShieldAlt,
-  FaTruck,
-  FaUndo,
-  FaHeadphones,
   FaStar,
   FaHeart,
   FaShoppingCart,
@@ -69,6 +65,7 @@ export const Home = () => {
   };
 
   return (
+
     <div className="home-page">
       {/* Hero Banner */}
       <section className="hero-section">
@@ -121,98 +118,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Feature Highlights Grid */}
-      <section className="features-section">
-        <div className="container">
-          <div className="features-grid">
-            <div className="feature-item">
-              <div className="feature-icon-box feature-icon-pink">
-                <FaTruck size={24} />
-              </div>
-              <div>
-                <h4 className="feature-title">Free Global Express</h4>
-                <p className="feature-desc">Complimentary on orders $500+</p>
-              </div>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon-box feature-icon-cyan">
-                <FaShieldAlt size={24} />
-              </div>
-              <div>
-                <h4 className="feature-title">2-Year Comprehensive</h4>
-                <p className="feature-desc">Full factory certified warranty</p>
-              </div>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon-box feature-icon-emerald">
-                <FaUndo size={24} />
-              </div>
-              <div>
-                <h4 className="feature-title">30-Day Money Back</h4>
-                <p className="feature-desc">Hassle-free return policy</p>
-              </div>
-            </div>
-
-            <div className="feature-item">
-              <div className="feature-icon-box feature-icon-amber">
-                <FaHeadphones size={24} />
-              </div>
-              <div>
-                <h4 className="feature-title">24/7 Gear Specialists</h4>
-                <p className="feature-desc">Assistance from live musicians</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Category Tiles */}
-      <section className="categories-section">
-        <div className="container">
-          <div className="section-header">
-            <div>
-              <h2 className="section-title">
-                Explore by <span className="text-gradient-rainbow">Category</span>
-              </h2>
-              <p className="section-subtitle">
-                Handcrafted collections tuned for stage musicians, sound producers, and performers.
-              </p>
-            </div>
-            <Link to="/category/all" className="section-view-all">
-              View All Instruments <FaArrowRight size={14} />
-            </Link>
-          </div>
-
-          <div className="categories-grid">
-            {categories.map((cat) => {
-              const IconComp = getCategoryIcon(cat.id);
-
-              return (
-                <Link
-                  key={cat.id}
-                  to={`/category/${cat.id}`}
-                  className={`category-card glass-panel category-${cat.id}`}
-                >
-                  <div className={`category-icon-box category-icon-${cat.id}`}>
-                    <IconComp size={28} />
-                  </div>
-                  <div>
-                    <h3 className="category-card-name">
-                      {cat.name}
-                    </h3>
-                    <span className={`category-card-count category-count-${cat.id}`}>
-                      {cat.itemCount}+ Instruments
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
+     
       {/* Featured Products */}
       <section className="featured-section">
         <div className="container">
@@ -225,9 +131,9 @@ export const Home = () => {
                 The most revered gear across world stages, home studios, and music academies.
               </p>
             </div>
-            <Link to="/category/all" className="section-view-all section-view-all-pink">
+            {/* <Link to="/category/all" className="section-view-all section-view-all-pink">
               Full Catalog <FaArrowRight size={14} />
-            </Link>
+            </Link> */}
           </div>
 
           {loading ? (
@@ -285,9 +191,9 @@ export const Home = () => {
 
                       <div className="product-card-footer">
                         <div className="product-price-box">
-                          <span className="product-price">${product.price.toFixed(2)}</span>
+                          <span className="product-price">₹{product.price.toFixed(2)}</span>
                           {product.originalPrice && (
-                            <span className="product-old-price">${product.originalPrice.toFixed(2)}</span>
+                            <span className="product-old-price">₹{product.originalPrice.toFixed(2)}</span>
                           )}
                         </div>
 

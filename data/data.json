@@ -8,7 +8,7 @@
     {
       "id": "keyboards",
       "name": "Keyboards & Synths",
-      "itemCount": 5
+      "itemCount": 4
     },
     {
       "id": "drums",
@@ -29,7 +29,7 @@
   "products": [
     {
       "id": "1",
-      "title": "Fender American Ultra Stratocaster",
+      "title": "Acoustic Guitar",
       "brand": "Fender",
       "category": "guitars",
       "price": 2199.99,
@@ -51,11 +51,12 @@
         "Pickups": "Ultra Noiseless Hot Strat Single-Coils",
         "Frets": "22 Medium Jumbo",
         "Bridge": "2-Point Deluxe Synchronized Tremolo"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/5GroWAOn8h8?si=bZabu6Ns-QO9_lGR"
     },
     {
       "id": "2",
-      "title": "Gibson Les Paul Standard 60s",
+      "title": "Classical Guitar",
       "brand": "Gibson",
       "category": "guitars",
       "price": 2799,
@@ -77,11 +78,12 @@
         "Pickups": "60s Burstbucker Lead & Rhythm",
         "Bridge": "ABR-1 Tune-O-Matic with Aluminum Stop Bar",
         "Scale Length": "24.75\""
-      }
+      },
+      "youtubeUrl": "https://youtu.be/q_lSnDuSgCM?si=vNSkfZna-jRO4Wru"
     },
     {
       "id": "3",
-      "title": "Taylor 814ce Grand Auditorium Acoustic",
+      "title": "Electric Guitars",
       "brand": "Taylor",
       "category": "guitars",
       "price": 3499,
@@ -103,11 +105,12 @@
         "Electronics": "Taylor Expression System 2 (ES2)",
         "Cutaway": "Venetian Cutaway",
         "Finish": "Gloss 3.5-mil Ultra-Thin"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/I5_BuHWAlnw?si=yLXMnQCr2LWsv17-"
     },
     {
       "id": "4",
-      "title": "PRS Custom 24 10-Top",
+      "title": "Acoustic Electric Guitar",
       "brand": "PRS Guitars",
       "category": "guitars",
       "price": 3299.99,
@@ -129,11 +132,12 @@
         "Pickups": "PRS 85/15 Treble & Bass",
         "Tuners": "PRS Phase III Locking",
         "Frets": "24"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/us5xN06GhKU?si=XB6PHjkA1lHg_VBZ"
     },
     {
       "id": "5",
-      "title": "Fender American Professional II Precision Bass",
+      "title": "Archtop Guitar",
       "brand": "Fender",
       "category": "guitars",
       "price": 1699.99,
@@ -153,11 +157,12 @@
         "Pickup": "V-Mod II Split Single-Coil P Bass",
         "Bridge": "4-Saddle HiMass Vintage",
         "Scale Length": "34\" Long Scale"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/us5xN06GhKU?si=XB6PHjkA1lHg_VBZ"
     },
     {
       "id": "6",
-      "title": "Ibanez Prestige RG5120M Polar Lights",
+      "title": "Bass Guitar",
       "brand": "Ibanez",
       "category": "guitars",
       "price": 1999.99,
@@ -177,32 +182,8 @@
         "Pickups": "Fishman Fluence Modern Humbuckers",
         "Tremolo": "Lo-Pro Edge Double Locking",
         "Frets": "24 Jumbo Stainless Steel with Prestige Edge Treatment"
-      }
-    },
-    {
-      "id": "7",
-      "title": "Yamaha Montage 8 Synthesizer Workstation",
-      "brand": "Yamaha",
-      "category": "keyboards",
-      "price": 3499.99,
-      "originalPrice": 3899.99,
-      "stock": 4,
-      "discount": 10,
-      "rating": 5,
-      "reviewsCount": 71,
-      "image": "https://images.unsplash.com/photo-1520523839898-507127053c17?w=800&auto=format&fit=crop&q=80",
-      "images": [
-        "https://images.unsplash.com/photo-1520523839898-507127053c17?w=800&auto=format&fit=crop&q=80",
-        "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&auto=format&fit=crop&q=80"
-      ],
-      "description": "Professional 88-key weighted action synthesizer workstation powered by Motion Control Synthesis Engine combining AWM2 sample architecture and pure FM-X frequency modulation.",
-      "specs": {
-        "Keybed": "88-Key Balanced Hammer Action with Aftertouch",
-        "Sound Engine": "AWM2 (Sample) + FM-X (Frequency Modulation)",
-        "Polyphony": "128-Note Stereo AWM2 + 128-Note FM-X",
-        "Display": "7\" Wide VGA Color Touchscreen",
-        "Controls": "Super Knob, 8 Motion Sequence Sliders, Ribbon Controller"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/Y6yrilF6bBc?si=zMSSwadOWKLlz93e"
     },
     {
       "id": "8",
@@ -226,7 +207,8 @@
         "Memory": "2GB Piano Library, 1GB Sample Library",
         "Drawbars": "Physical Drawbars with LED Indicators",
         "Effects": "Independent Reverb, Delay, Modulation per Section"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/O2K0ptoYpuc?si=YpUSFG4XFn_XKXa5"
     },
     {
       "id": "9",
@@ -250,7 +232,8 @@
         "Sequencer": "16-Track Polyphonic Clip-Based Sequencer",
         "Sampler": "16 RGB Pads with Live Sampling",
         "Audio Interface": "24-Bit / 96 kHz Stereo USB Audio Interface"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/O2K0ptoYpuc?si=YpUSFG4XFn_XKXa5"
     },
     {
       "id": "10",
@@ -274,7 +257,8 @@
         "Filter": "Classic Moog Ladder Filter (6/12/18/24 dB/Oct)",
         "Presets": "256 Locations (16 Banks x 16 Presets)",
         "Modulation": "2 Programmable Modulation Busses"
-      }
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=2Iu_N_j5JkQ"
     },
     {
       "id": "11",
@@ -298,7 +282,8 @@
         "Oscillators": "2 Analog VCOs + 1 Digital Multi-Engine (Noise/VPM/User)",
         "Effects": "Modulation, Delay, and Reverb",
         "Sequencer": "16-Step Polyphonic Motion Sequencer"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/5GroWAOn8h8?si=bZabu6Ns-QO9_lGR"
     },
     {
       "id": "12",
@@ -323,7 +308,8 @@
         "Hi-Hat": "VH-14D Digital 14\" Optical Hi-Hat",
         "Ride": "CY-18DR Digital 18\" Multi-Sensor Ride",
         "Pads": "Multi-Ply Mesh Heads with Tunable Tension"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/q_lSnDuSgCM?si=vNSkfZna-jRO4Wru"
     },
     {
       "id": "13",
@@ -346,7 +332,8 @@
         "Configuration": "10\" & 12\" Rack Toms, 16\" Floor Tom, 22\" Bass Drum, 14\" Snare",
         "Bearing Edges": "45-Degree Precision Hand-Cut Edges",
         "Hoops": "True-Hoop Triple-Flanged Chrome Hoops"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/I5_BuHWAlnw?si=yLXMnQCr2LWsv17-"
     },
     {
       "id": "14",
@@ -369,7 +356,8 @@
         "Configuration": "10\" & 12\" Toms, 16\" Floor Tom, 22\" Kick Drum",
         "Mounting System": "OptiMount Suspension System",
         "Hoops": "SuperHoop II 2.3mm Steel Triple-Flanged"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/us5xN06GhKU?si=XB6PHjkA1lHg_VBZ"
     },
     {
       "id": "15",
@@ -392,7 +380,8 @@
         "Frontplate": "Siam Oak with Matte Satin Finish",
         "Snares": "Dual Internal Fixed Steel Snare Wires",
         "Feet": "Anti-Vibration Rubber Base Feet"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/us5xN06GhKU?si=XB6PHjkA1lHg_VBZ"
     },
     {
       "id": "16",
@@ -416,7 +405,8 @@
         "Frequency Range": "20 Hz - 20,000 Hz",
         "Max SPL": "127 dB SPL (117 dB without -10dB pad)",
         "Impedance": "200 Ohms Rated"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/Y6yrilF6bBc?si=zMSSwadOWKLlz93e"
     },
     {
       "id": "17",
@@ -440,7 +430,8 @@
         "Frequency Response": "50 Hz - 20,000 Hz",
         "Controls": "Bass Roll-Off and Mid-Range Presence Boost Switches",
         "Output Connector": "3-Pin Professional Audio XLR Male"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/Y6yrilF6bBc?si=zMSSwadOWKLlz93e"
     },
     {
       "id": "18",
@@ -464,7 +455,8 @@
         "Preamps": "2 Unison-Enabled Preamps with Classic Emulations",
         "DSP Processing": "DUO Core Realtime UAD Processing",
         "Dynamic Range": "127 dB D/A Dynamic Range"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/O2K0ptoYpuc?si=YpUSFG4XFn_XKXa5"
     },
     {
       "id": "19",
@@ -488,7 +480,8 @@
         "Total Output Power": "120W Bi-Amp Architecture",
         "Frequency Response": "38 Hz - 30,000 Hz",
         "Room Controls": "Room Control and High Trim Frequency Response Switches"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/O2K0ptoYpuc?si=YpUSFG4XFn_XKXa5"
     },
     {
       "id": "20",
@@ -512,7 +505,8 @@
         "Frequency Response": "10 Hz - 41,000 Hz",
         "Total Harmonic Distortion": "< 0.05%",
         "Cable": "Detachable Oxygen-Free Copper (OFC) Cable (3m)"
-      }
+      },
+      "youtubeUrl": "https://www.youtube.com/watch?v=2Iu_N_j5JkQ"
     },
     {
       "id": "21",
@@ -536,7 +530,8 @@
         "Neck": "62-Style Professional Neck",
         "Pads": "Waterproof Leather with Nylon Resonators",
         "Finish": "Gold Lacquer Body & Keys"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/5GroWAOn8h8?si=bZabu6Ns-QO9_lGR"
     },
     {
       "id": "22",
@@ -560,7 +555,8 @@
         "Bell": "#37 One-Piece Hand-Hammered Yellow Brass",
         "Pistons": "Monel Metal Hand-Lapped Pistons",
         "Finish": "Brilliant Silver Plate"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/q_lSnDuSgCM?si=vNSkfZna-jRO4Wru"
     },
     {
       "id": "23",
@@ -584,14 +580,15 @@
         "Body & Footjoint": "Nickel Silver with Silver Plating",
         "Mechanism": "Pointed Key Arms with Split-E",
         "Key": "C with Low C Footjoint"
-      }
+      },
+      "youtubeUrl": "https://youtu.be/I5_BuHWAlnw?si=yLXMnQCr2LWsv17-"
     }
   ],
   "orders": [
     {
       "id": "ORD-1001",
       "userId": "2",
-      "customerName": "Alex Johnson",
+      "customerName": "",
       "customerEmail": "alex@example.com",
       "items": [
         {
@@ -623,24 +620,35 @@
   "users": [
     {
       "id": "1",
-      "name": "Admin Bojja",
-      "email": "admin@musicmart.com",
-      "password": "adminpassword123",
+      "name": "Bojja",
+      "email": "musicmart123@gmail.com",
+      "password": "password123",
       "role": "admin",
-      "phone": "+1 (555) 987-6543",
-      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+      "phone": "+91 7789456123",
+      "avatar": "",
       "createdAt": "2026-01-10T10:00:00.000Z"
     },
     {
       "id": "2",
-      "name": "Alex Johnson",
-      "email": "alex@example.com",
-      "password": "password123",
+      "name": "Abhilash",
+      "email": "abhilash456@.com",
+      "password": "password456",
       "role": "customer",
-      "phone": "+1 (555) 123-4567",
-      "avatar": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80",
-      "address": "742 Evergreen Terrace, Seattle, WA 98101, United States",
+      "phone": "+91 7731867174",
+      "avatar": "",
+      "address": "1-3-447 kavadigida, hyderabad",
       "createdAt": "2026-02-15T12:00:00.000Z"
+    },
+    {
+      "name": "abhi",
+      "email": "abhi@gmail.com",
+      "phone": "7789456123",
+      "avatar": "",
+      "password": "Abhi1234",
+      "role": "customer",
+      "createdAt": "2026-09-14T02:39:50.453Z",
+      "id": "1MnkRPGS3v8"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

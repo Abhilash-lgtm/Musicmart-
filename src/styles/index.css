@@ -13,30 +13,30 @@
   --text-muted: #64748b;
   --text-dim: #94a3b8;
 
-  /* Vibrant Accent Multi-Colors */
+  /* Clean Accent Multi-Colors */
   --accent-pink: #e11d48;
   --accent-purple: #7c3aed;
   --accent-cyan: #0284c7;
   --accent-emerald: #059669;
   --accent-amber: #d97706;
 
-  /* Gradients */
-  --accent-gradient: linear-gradient(135deg, #e11d48 0%, #7c3aed 100%);
-  --accent-gradient-cyan: linear-gradient(135deg, #0284c7 0%, #06b6d4 100%);
-  --accent-gradient-emerald: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  --accent-gradient-fire: linear-gradient(135deg, #e11d48 0%, #f97316 100%);
-  --accent-gradient-rainbow: linear-gradient(135deg, #e11d48 0%, #7c3aed 50%, #0284c7 100%);
+  /* Subtle Clean Gradients */
+  --accent-gradient: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  --accent-gradient-cyan: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  --accent-gradient-emerald: linear-gradient(135deg, #059669 0%, #047857 100%);
+  --accent-gradient-fire: linear-gradient(135deg, #e11d48 0%, #be123c 100%);
+  --accent-gradient-rainbow: linear-gradient(135deg, #0f172a 0%, #e11d48 100%);
 
   /* Border Radii */
   --radius-sm: 6px;
   --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+  /* Subtle Soft Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.06);
 }
 
 /* Base Resets */
@@ -66,6 +66,15 @@ button {
   font-family: inherit;
 }
 
+input, button, select, textarea {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
 .container {
   width: 100%;
   max-width: 1240px;
@@ -73,32 +82,22 @@ button {
   padding: 0 1.5rem;
 }
 
-/* Gradient Texts */
-.text-gradient {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-cyan {
-  background: var(--accent-gradient-cyan);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
+/* Typography Accents */
+.text-gradient,
+.text-gradient-cyan,
 .text-gradient-rainbow {
-  background: var(--accent-gradient-rainbow);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--accent-pink);
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 
-/* Glass & Card Panels */
+/* Card Panels */
 .glass-panel {
   background: #ffffff;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
-  transition: all 0.2s ease;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .glass-panel:hover {

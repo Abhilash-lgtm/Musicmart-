@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaSave, FaArrowLeft, FaPlus, FaTrash } from 'react-icons/fa';
+import { FaSave, FaArrowLeft, FaPlus, FaTrash, FaYoutube } from 'react-icons/fa';
 import productService from '../../services/productService';
 import Input from '../../components/ui/Input';
 import Button from '../../components/ui/Button';
@@ -18,6 +18,7 @@ export const AddProduct = () => {
     originalPrice: '',
     stock: '15',
     image: '',
+    youtubeUrl: '',
     description: '',
   });
 
@@ -138,7 +139,7 @@ export const AddProduct = () => {
             </div>
 
             <Input
-              label="Retail Price ($)"
+              label="Retail Price (₹)"
               type="number"
               step="0.01"
               name="price"
@@ -167,6 +168,16 @@ export const AddProduct = () => {
             value={formData.image}
             onChange={handleChange}
             required
+          />
+
+          <Input
+            label="YouTube Video Demo URL / Video ID (Optional)"
+            type="text"
+            name="youtubeUrl"
+            placeholder="e.g. https://www.youtube.com/watch?v=... or 11-character Video ID"
+            value={formData.youtubeUrl}
+            onChange={handleChange}
+            icon={FaYoutube}
           />
 
           <Input

@@ -119,7 +119,7 @@ export const OrderList = () => {
                     </div>
                   </td>
                   <td>{new Date(o.createdAt).toLocaleDateString()}</td>
-                  <td className="table-price-val">${o.total?.toFixed(2)}</td>
+                  <td className="table-price-val">₹{o.total?.toFixed(2)}</td>
                   <td>
                     <StatusBadge status={o.status} type="order" />
                   </td>
