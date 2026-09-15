@@ -13,3 +13,4 @@ npm install -D <package-name>	-   Installs a tool needed only during development
 npm uninstall <package-name>    -   emoves a library from your project and deletes it from package.json
 
 
+git init
