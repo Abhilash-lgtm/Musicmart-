@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import AIAssistant from '../ai/AIAssistant';
 
 // Layout wrapper for all public storefront pages
 export const StoreLayout = () => {
@@ -12,6 +13,7 @@ export const StoreLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <AIAssistant />
     </div>
   );
 };
