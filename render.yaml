@@ -21,7 +21,7 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        value: https://musicmart-4pzd.onrender.com
+        value: https://musicmart-backend-htci.onrender.com
     routes:
       - type: rewrite
         source: /*
