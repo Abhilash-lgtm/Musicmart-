@@ -1,9 +1,10 @@
 services:
   # ─────────────────────────────────────────────
   # Backend — json-server Web Service
+  # URL: https://musicmart-backend-htci.onrender.com
   # ─────────────────────────────────────────────
   - type: web
-    name: musicmart-api
+    name: Musicmart--backend
     runtime: node
     buildCommand: npm install
     startCommand: npm start
@@ -12,17 +13,16 @@ services:
         value: 10000
 
   # ─────────────────────────────────────────────
-  # Frontend — React / Vite Static Site
+  # Frontend — React/Vite served via Node (SPA)
+  # URL: https://musicmart-4pzd.onrender.com
   # ─────────────────────────────────────────────
   - type: web
-    name: musicmart-frontend
-    runtime: static
+    name: Musicmart-
+    runtime: node
     buildCommand: npm install && npm run build
-    staticPublishPath: dist
+    startCommand: npm run serve
     envVars:
       - key: VITE_API_URL
         value: https://musicmart-backend-htci.onrender.com
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
+      - key: PORT
+        value: 10000
