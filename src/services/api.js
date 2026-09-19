@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL for the JSON Server backend API
-const API_BASE_URL = 'http://localhost:5000';
+const API_BASE_URL = 'srv-dadb8pjncjis738mo0og';
 
 // Create a configured Axios instance
 export const api = axios.create({
