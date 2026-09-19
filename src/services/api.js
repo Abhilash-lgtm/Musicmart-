@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 // Base URL for the JSON Server backend API
-const API_BASE_URL = 'https://musicmart-4pzd.onrender.com';
+// Uses VITE_API_URL env variable in production (set in Render dashboard),
+// falls back to localhost:5000 for local development.
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // Create a configured Axios instance
 export const api = axios.create({
