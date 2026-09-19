@@ -33,7 +33,7 @@ shoping/
 ```bash
 npm run dev
 ```
-Open **srv-dadb8pjncjis738mo0og** in your browser.
+Open **https://musicmart-4pzd.onrender.com** in your browser.
 
 ### 2. Default Test Credentials
 - **Admin**: `admin@musicmart.com` / `admin123`

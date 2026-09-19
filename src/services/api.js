@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Base URL for the JSON Server backend API
-const API_BASE_URL = 'srv-dadb8pjncjis738mo0og';
+const API_BASE_URL = 'https://musicmart-4pzd.onrender.com';
 
 // Create a configured Axios instance
 export const api = axios.create({
